@@ -127,15 +127,14 @@ async function syncProjectProgress(env, projectId) {
 const REQUEST_TO_EMAIL = "anthoniomoreno1@gmail.com";
 
 async function sendRequestEmail(env, data) {
-  const subject = `Solicitud de proyecto — ${data.org} (${data.folio})`;
+  const subject = `Solicitud de sesión — ${data.organizacion} (${data.folio})`;
   const text =
     `Folio: ${data.folio}\n` +
-    `Organización / Nombre: ${data.org}\n` +
-    `Correo de contacto: ${data.mail}\n` +
-    `Teléfono: ${data.phone || "—"}\n` +
-    `Tipo de necesidad: ${data.tipo}\n` +
-    `Urgencia: ${data.urgencia}\n\n` +
-    `Descripción de la necesidad:\n${data.desc}`;
+    `Nombre: ${data.nombre}\n` +
+    `Organización: ${data.organizacion}\n` +
+    `Correo de contacto: ${data.correo}\n` +
+    `Industria: ${data.industria || "—"}\n\n` +
+    `¿Qué le gustaría resolver?\n${data.mensaje || "—"}`;
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -145,7 +144,7 @@ async function sendRequestEmail(env, data) {
     body: JSON.stringify({
       from: "Pahlass <onboarding@resend.dev>",
       to: [REQUEST_TO_EMAIL],
-      reply_to: data.mail,
+      reply_to: data.correo,
       subject,
       text,
     }),
@@ -192,19 +191,18 @@ export default {
       // ---- solicitud pública desde el panel "Iniciar un proyecto" del sitio ----
       if (url.pathname === "/api/solicitudes" && request.method === "POST") {
         const body = await request.json().catch(() => ({}));
-        const org = (body.org || "").trim();
-        const mail = (body.mail || "").trim();
-        const phone = (body.phone || "").trim();
-        const tipo = (body.tipo || "").trim();
-        const urgencia = (body.urgencia || "").trim();
-        const desc = (body.desc || "").trim();
-        const mailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail);
-        if (!org || !mailOk || !phone || desc.length < 20) {
+        const nombre = (body.nombre || "").trim();
+        const organizacion = (body.organizacion || "").trim();
+        const correo = (body.correo || "").trim();
+        const industria = (body.industria || "").trim();
+        const mensaje = (body.mensaje || "").trim();
+        const correoOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
+        if (!nombre || !organizacion || !correoOk) {
           return json({ ok: false, error: "Revisa los campos del formulario." }, 400, cors);
         }
         const folio = "PAHLASS-" + new Date().getFullYear() + "-" + String(Math.floor(1000 + Math.random() * 9000));
         try {
-          await sendRequestEmail(env, { org, mail, phone, tipo, urgencia, desc, folio });
+          await sendRequestEmail(env, { nombre, organizacion, correo, industria, mensaje, folio });
         } catch (err) {
           return json({ ok: false, error: "No se pudo enviar la solicitud. Intenta de nuevo." }, 502, cors);
         }

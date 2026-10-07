@@ -1,1091 +1,289 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pahlass®</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pahlass Technologies</title>
+<meta name="description" content="Desarrollo de software e ingeniería de datos. Construimos el sistema donde tu organización registra su operación y la convierte en decisiones.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://pahlass.com/">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/favicon-180.png">
+<meta name="theme-color" content="#08090B">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pahlass.com/">
+<meta property="og:site_name" content="Pahlass">
+<meta property="og:title" content="Pahlass Technologies">
+<meta property="og:description" content="Desarrollo de software e ingeniería de datos. Construimos el sistema donde tu organización registra su operación y la convierte en decisiones.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Pahlass Technologies">
+<meta name="twitter:description" content="Desarrollo de software e ingeniería de datos. Construimos el sistema donde tu organización registra su operación y la convierte en decisiones.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#0E1116;
-    --ink-soft:#3A3F49;
-    --paper:#FFFFFF;
-    --gray-50:#F6F7F9;
-    --gray-100:#ECEEF1;
-    --line:#E1E4E9;
-    --line-on-dark:rgba(255,255,255,0.12);
-    --accent:#2F4BFF;
-    --accent-deep:#1B2C99;
-    --navy:#141B33;
-    --navy-2:#1B2440;
-    --paper-text:#F3F4F7;
-    --muted-on-dark:#A7ACC0;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
-  body{
-    font-family:'Inter',sans-serif;
-    background:#E9E9E4;
-    color:var(--ink);
-    -webkit-font-smoothing:antialiased;
-  }
-  .mono{font-family:'IBM Plex Mono',monospace;}
-  a{color:inherit;}
-  img{display:block; max-width:100%;}
-
-  /* ---------------- NAV ---------------- */
-  nav{
-    position:sticky; top:16px; z-index:50;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:14px 28px;
-    margin:0 20px;
-    border-radius:999px;
-    background:rgba(233,233,228,0.75);
-    -webkit-backdrop-filter:blur(16px) saturate(1.6);
-    backdrop-filter:blur(16px) saturate(1.6);
-    border:1px solid rgba(255,255,255,0.5);
-    box-shadow:0 10px 34px rgba(20,17,10,0.10), inset 0 1px 0 rgba(255,255,255,0.4);
-    transition:padding 0.3s ease, top 0.3s ease, box-shadow 0.3s ease;
-  }
-  nav.scrolled{padding:10px 24px; top:10px; box-shadow:0 14px 40px rgba(20,17,10,0.14), inset 0 1px 0 rgba(255,255,255,0.4);}
-  .nav-left{display:flex; align-items:center; gap:12px;}
-  .logo-mark{height:30px; width:auto; display:block;}
-  .nav-right{display:flex; align-items:center; gap:12px;}
-  .nav-cta{
-    font-size:13px; font-weight:500; background:var(--paper); color:var(--ink);
-    padding:10px 20px; text-decoration:none; transition:background 0.2s ease, color 0.2s ease;
-    border-radius:999px; border:1px solid var(--line);
-  }
-  .nav-cta:hover{background:var(--ink); color:#fff;}
-  .nav-icon{
-    width:36px; height:36px; border-radius:999px; border:1px solid var(--line);
-    display:flex; align-items:center; justify-content:center; flex-shrink:0;
-    color:var(--ink-soft); background:transparent; cursor:pointer;
-    font:inherit; padding:0; transition:background 0.2s ease, border-color 0.2s ease;
-  }
-  .nav-icon:hover{border-color:var(--ink-soft);}
-
-  /* ---------------- BURGER (dos líneas que se convierten en X) ---------------- */
-  .burger{width:15px; height:11px; position:relative;}
-  .burger span{
-    position:absolute; left:0; width:100%; height:1.5px; background:currentColor;
-    transition:transform 0.25s ease, opacity 0.2s ease, top 0.25s ease;
-  }
-  .burger span:nth-child(1){top:0;}
-  .burger span:nth-child(2){top:9.5px;}
-  .menu-open .burger span:nth-child(1){top:4.75px; transform:rotate(45deg);}
-  .menu-open .burger span:nth-child(2){top:4.75px; transform:rotate(-45deg);}
-
-  /* ---------------- MENU OVERLAY (estilo Palantir: pantalla completa, links + acerca de) ---------------- */
-  .menu-overlay{
-    position:fixed; inset:0; z-index:100; background:var(--paper);
-    opacity:0; visibility:hidden; pointer-events:none;
-    transition:opacity 0.3s ease, visibility 0s linear 0.3s;
-    overflow-y:auto;
-  }
-  .menu-overlay.is-open{opacity:1; visibility:visible; pointer-events:auto; transition:opacity 0.3s ease;}
-  .menu-top{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:18px 40px;
-  }
-  .menu-body{
-    max-width:1180px; margin:0 auto; padding:80px 40px 100px;
-    display:grid; grid-template-columns:1fr 1fr; gap:64px;
-  }
-  .menu-links{display:flex; flex-direction:column; gap:6px;}
-  .menu-links a{
-    text-decoration:none; color:var(--ink); font-family:'Space Grotesk'; font-weight:500;
-    font-size:clamp(30px,5vw,52px); line-height:1.3; letter-spacing:-0.01em;
-    padding:6px 0; transition:color 0.2s ease; opacity:0; transform:translateY(14px);
-    transition:opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1), color 0.2s ease;
-  }
-  .menu-overlay.is-open .menu-links a{opacity:1; transform:translateY(0);}
-  .menu-links a:nth-child(1){transition-delay:0.05s;}
-  .menu-links a:nth-child(2){transition-delay:0.1s;}
-  .menu-links a:nth-child(3){transition-delay:0.15s;}
-  .menu-links a:nth-child(4){transition-delay:0.2s;}
-  .menu-links a:hover{color:var(--accent);}
-  .menu-about{
-    border-left:1px solid var(--line); padding-left:48px;
-    opacity:0; transition:opacity 0.5s ease 0.25s;
-  }
-  .menu-overlay.is-open .menu-about{opacity:1;}
-  .menu-about p{font-size:15px; line-height:1.75; color:var(--ink-soft); margin-top:16px; max-width:420px;}
-  .menu-access{
-    display:inline-block; margin-top:32px; font-size:14px; font-weight:500;
-    background:var(--ink); color:#fff; padding:13px 26px; border-radius:999px;
-    text-decoration:none; transition:background 0.2s ease;
-  }
-  .menu-access:hover{background:var(--accent);}
-  .menu-footer{
-    max-width:1180px; margin:0 auto; padding:24px 40px; border-top:1px solid var(--line);
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
-    font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.04em; color:#8A8F9C;
-  }
-  .menu-footer a{color:#8A8F9C; text-decoration:none;}
-  .menu-footer a:hover{color:var(--ink);}
-  body.menu-locked{overflow:hidden;}
-  @media (prefers-reduced-motion: reduce){
-    .menu-overlay, .menu-links a, .menu-about, .burger span{transition:none !important;}
-  }
-
-  /* ---------------- HERO (panel oscuro, grid de puntos vivo) ---------------- */
-  .hero-wrap{padding:6px 12px 0;}
-  .hero{
-    position:relative;
-    background:#0B0C0E; color:var(--paper-text);
-    border-radius:14px; overflow:hidden;
-    padding:64px 56px 0;
-    min-height:640px;
-    display:flex; flex-direction:column; justify-content:space-between;
-    border:1px solid rgba(255,255,255,0.08);
-  }
-  .hero-dots{position:absolute; inset:0; z-index:0; width:100%; height:100%; display:block;}
-  .hero::after{
-    content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
-    background:radial-gradient(120% 100% at 16% 0%, rgba(11,12,14,0.1) 0%, rgba(11,12,14,0.55) 46%, #0B0C0E 88%);
-  }
-  .hero-corner{position:absolute; z-index:2; font-family:'IBM Plex Mono'; font-size:14px; color:rgba(255,255,255,0.22); line-height:1; pointer-events:none;}
-  .hero-corner.tl{top:18px; left:18px;}
-  .hero-corner.tr{top:18px; right:18px;}
-  .hero-corner.bl{bottom:18px; left:18px;}
-  .hero-corner.br{bottom:18px; right:18px;}
-
-  .hero-top{position:relative; z-index:2;}
-  .hero-badge{
-    display:inline-flex; align-items:center; gap:9px;
-    font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
-    color:#C7CCDB; border:1px solid rgba(255,255,255,0.16); border-radius:6px;
-    padding:8px 14px; margin-bottom:34px;
-  }
-  .hero-badge .blink{width:6px; height:6px; border-radius:50%; background:#8CF57A; box-shadow:0 0 8px rgba(140,245,122,0.7); flex-shrink:0;}
-  .hero-head{display:flex; justify-content:space-between; align-items:flex-end; gap:28px; flex-wrap:wrap;}
-  .hero h1{
-    font-family:'Space Grotesk'; font-weight:600; letter-spacing:-0.02em;
-    font-size:clamp(34px,4.4vw,58px); line-height:1.08; color:#fff; max-width:620px;
-  }
-  .hero-actions{display:flex; gap:12px; flex-wrap:wrap; flex-shrink:0;}
-  .btn-primary{
-    background:var(--accent); color:#fff; font-weight:500; font-size:14px;
-    padding:13px 22px; text-decoration:none; display:inline-block; transition:background 0.2s ease;
-    border-radius:999px;
-  }
-  .btn-primary:hover{background:var(--accent-deep);}
-  .btn-ghost{
-    border:1px solid rgba(255,255,255,0.18); color:#fff; font-size:14px; font-weight:500;
-    padding:13px 22px; text-decoration:none; display:inline-block; transition:border-color 0.2s ease, background 0.2s ease;
-    border-radius:999px;
-  }
-  .btn-ghost:hover{border-color:rgba(255,255,255,0.4); background:rgba(255,255,255,0.06);}
-
-  .hero-divider{position:relative; z-index:2; height:1px; background:rgba(255,255,255,0.12); margin:36px 0 32px;}
-  .hero-divider::before{content:''; position:absolute; left:0; top:0; height:1px; width:130px; max-width:40%; background:var(--accent);}
-
-  .hero-cols{position:relative; z-index:2; display:grid; grid-template-columns:repeat(3,1fr); gap:36px;}
-  .hero-cols p{font-size:13.5px; line-height:1.65; color:#9BA2B8; max-width:320px;}
-
-  .hero-meta{
-    position:relative; z-index:2;
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
-    border-top:1px solid rgba(255,255,255,0.1); padding:20px 0; margin-top:40px;
-    font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.04em; color:#7A8199;
-  }
-  .hero-meta span b{color:#C7CCDB; font-weight:500;}
-  .hero-meta .sep{margin:0 10px; color:#3E4358;}
-
-  .load-in{opacity:0; transform:translateY(16px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);}
-  .load-in.shown{opacity:1; transform:translateY(0);}
-  @media (prefers-reduced-motion: reduce){ .load-in{opacity:1; transform:none;} }
-
-  /* ---------------- TYPEWRITER (títulos que se escriben al hacer scroll) ---------------- */
-  .tw-char{opacity:0; transition:opacity 0.05s linear;}
-  .tw-char.tw-in{opacity:1;}
-  .tw-cursor{display:inline-block; width:2px; height:0.85em; margin-left:2px; background:currentColor; opacity:0; vertical-align:-0.1em;}
-  .tw-cursor.tw-active{opacity:1; animation:tw-blink 0.9s step-end infinite;}
-  @keyframes tw-blink{50%{opacity:0;}}
-  @media (prefers-reduced-motion: reduce){
-    .tw-char{opacity:1 !important; transition:none;}
-    .tw-cursor{display:none;}
-  }
-
-
-  /* ---------------- SECTION LABEL (shared) ---------------- */
-  .sec-label{
-    font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.08em;
-    color:var(--accent); text-transform:uppercase; margin-bottom:16px;
-    display:flex; align-items:center; gap:8px;
-  }
-  .sec-label .dash{width:16px; height:1px; background:var(--accent);}
-  .sec-label.on-dark{color:#8CA0FF;}
-  .sec-label.on-dark .dash{background:#8CA0FF;}
-  .sec-head{max-width:640px; margin-bottom:64px;}
-  .sec-head h2{font-family:'Space Grotesk'; font-weight:500; font-size:clamp(24px,2.6vw,34px); line-height:1.22; color:var(--ink);}
-  .sec-head.on-dark h2{color:var(--paper-text);}
-  .sec-head p{font-size:15px; line-height:1.7; color:var(--ink-soft); margin-top:16px;}
-  .sec-head.on-dark p{color:var(--muted-on-dark);}
-
-  /* ---------------- FIELD EXPAND (imagen que se expande al hacer scroll) ---------------- */
-  .field-expand{background:var(--paper); padding:110px 0 0;}
-  .field-expand-head{max-width:620px; margin:0 auto 56px; padding:0 48px; text-align:center;}
-  .field-expand-head .sec-label{justify-content:center;}
-  .field-expand-head h2{font-family:'Space Grotesk'; font-weight:500; font-size:clamp(24px,2.8vw,36px); line-height:1.25; color:var(--ink);}
-  .field-stage{position:relative; height:230vh;}
-  .field-pin{position:sticky; top:0; height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden;}
-  .field-media{position:relative; overflow:hidden; box-shadow:0 30px 80px rgba(20,17,10,0.22);}
-  .field-media img{width:100%; height:100%; object-fit:cover; display:block;}
-  .field-stage.no-motion{height:auto;}
-  .field-stage.no-motion .field-pin{position:relative; height:72vh;}
-  .field-stage.no-motion .field-media{width:100% !important; height:100% !important; border-radius:20px !important;}
-  @media (max-width:900px){
-    .field-expand{padding:70px 0 0;}
-    .field-expand-head{padding:0 20px; margin-bottom:36px;}
-  }
-
-  /* ---------------- DECLARATION ---------------- */
-  .declaration{background:var(--gray-50); padding:100px 48px 120px;}
-  .decl-huge{
-    max-width:1180px; margin:0 auto 90px;
-    font-family:'Space Grotesk'; font-weight:500; letter-spacing:-0.015em;
-    font-size:clamp(30px,4.4vw,58px); line-height:1.12; color:var(--ink);
-  }
-  .decl-huge .fade{color:#A7ACB8;}
-  .decl-huge .accent{color:var(--accent);}
-  .decl-grid{max-width:1180px; margin:0 auto; display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:start;}
-  .decl-quote{
-    font-family:'Space Grotesk'; font-weight:500; font-size:clamp(20px,2vw,25px);
-    line-height:1.4; color:var(--ink-soft);
-  }
-  .decl-quote .accent{color:var(--accent);}
-  .decl-panel{border:1px solid var(--line-on-dark); background:var(--ink); padding:36px;}
-  .decl-panel p{font-size:15px; line-height:1.75; color:var(--paper-text); margin-bottom:20px;}
-  .decl-panel p:last-child{margin-bottom:0;}
-
-  /* ---------------- CAPABILITIES ---------------- */
-  .caps{background:var(--paper); padding:120px 48px;}
-  .caps-list{max-width:1180px; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
-  .cap-item{background:var(--paper); padding:36px 32px; transition:background 0.25s ease;}
-  .cap-item:hover{background:var(--gray-50);}
-  .cap-icon{width:34px; height:34px; margin-bottom:20px;}
-  .cap-item .capnum{font-family:'IBM Plex Mono'; font-size:11px; color:#8A8F9C; display:block; margin-bottom:14px;}
-  .cap-item h3{font-family:'Space Grotesk'; font-weight:500; font-size:17px; margin-bottom:10px; color:var(--ink);}
-  .cap-item p{font-size:13.5px; line-height:1.6; color:var(--ink-soft); margin-bottom:18px;}
-  .cap-readout{display:flex; align-items:center; gap:10px; font-family:'IBM Plex Mono'; font-size:9.5px; color:#9298A6; border-top:1px solid var(--line); padding-top:14px;}
-  .cap-readout .bar{flex:1; height:2px; background:var(--gray-100); position:relative; overflow:hidden;}
-  .cap-readout .bar-fill{position:absolute; left:0; top:0; height:100%; background:var(--accent);}
-
-  /* ---------------- CHIP MARQUEE (capacidades en movimiento continuo) ---------------- */
-  .chip-marquee{background:var(--paper); padding:0 0 100px; display:flex; flex-direction:column; gap:14px;}
-  .marquee-row{
-    overflow:hidden; width:100%;
-    -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-    mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  }
-  .marquee-track{display:flex; gap:10px; width:max-content; animation:marquee-left 36s linear infinite;}
-  .marquee-row.marquee-reverse .marquee-track{animation-name:marquee-right;}
-  .marquee-chip{
-    flex:0 0 auto; display:inline-flex; align-items:center;
-    padding:9px 18px; border-radius:999px; background:var(--gray-100); border:1px solid var(--line);
-    font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:0.01em; color:var(--ink-soft);
-    white-space:nowrap;
-  }
-  @keyframes marquee-left{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
-  @keyframes marquee-right{ from{transform:translateX(-50%);} to{transform:translateX(0);} }
-  @media (prefers-reduced-motion: reduce){ .marquee-track{animation:none;} }
-
-  /* ---------------- PROCESS (stepper, not photo) ---------------- */
-  /* ---------------- DEPLOY (foto de campo + fases + modelo de colaboración, todo en una sola sección) ---------------- */
-  .deploy{position:relative; background:var(--navy); color:var(--paper-text); overflow:hidden;}
-  .deploy-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 30%;}
-  .deploy-scrim{
-    position:absolute; inset:0;
-    background:
-      linear-gradient(180deg, rgba(10,12,20,0.95) 0%, rgba(10,12,20,0.88) 26%, rgba(10,12,20,0.82) 100%),
-      linear-gradient(90deg, rgba(10,12,20,0.45) 0%, rgba(10,12,20,0.1) 60%);
-  }
-  .deploy-inner{position:relative; z-index:1; max-width:1180px; margin:0 auto; padding:120px 48px;}
-  .deploy-head{max-width:640px; margin-bottom:64px;}
-  .deploy-head .sec-label{margin-bottom:18px;}
-  .deploy-head h2{font-family:'Space Grotesk'; font-weight:500; font-size:clamp(28px,3.4vw,42px); line-height:1.15; margin-bottom:18px;}
-  .deploy-lede{font-size:15.5px; line-height:1.7; color:var(--muted-on-dark); max-width:520px;}
-
-  .deploy-body{display:grid; grid-template-columns:1.3fr 1fr; gap:64px; align-items:start;}
-  .deploy-col-label{display:block; font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:#8CA0FF; margin-bottom:24px;}
-
-  .deploy-phases{border-top:1px solid var(--line-on-dark);}
-  .phase-row{
-    display:grid; grid-template-columns:44px 1fr; gap:18px; padding:20px 0; border-bottom:1px solid var(--line-on-dark);
-    opacity:0; transform:translateY(16px);
-    transition:opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
-  }
-  .phase-row.in-view{opacity:1; transform:translateY(0);}
-  .phase-row:nth-child(1){transition-delay:0s;}
-  .phase-row:nth-child(2){transition-delay:0.08s;}
-  .phase-row:nth-child(3){transition-delay:0.16s;}
-  .phase-row:nth-child(4){transition-delay:0.24s;}
-  .phase-row:nth-child(5){transition-delay:0.32s;}
-  .phase-idx{font-family:'IBM Plex Mono'; font-size:13px; color:#5B6180; padding-top:2px;}
-  .phase-row h3{font-family:'Space Grotesk'; font-weight:500; font-size:17px; margin-bottom:6px;}
-  .phase-row p{font-size:13.5px; line-height:1.65; color:var(--muted-on-dark); max-width:420px;}
-
-  .deploy-models{display:flex; flex-direction:column; gap:14px;}
-  .model-card{
-    background:rgba(255,255,255,0.05); border:1px solid var(--line-on-dark); border-radius:12px;
-    padding:24px 26px; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
-    opacity:0; transform:translateY(16px);
-    transition:opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1), border-color 0.3s ease, background 0.3s ease;
-  }
-  .model-card.in-view{opacity:1; transform:translateY(0);}
-  .model-card:nth-child(1){transition-delay:0.1s;}
-  .model-card:nth-child(2){transition-delay:0.2s;}
-  .model-card:nth-child(3){transition-delay:0.3s;}
-  .model-card:hover{border-color:rgba(140,160,255,0.4); background:rgba(255,255,255,0.08);}
-  .model-code{display:block; font-family:'IBM Plex Mono'; font-size:9.5px; letter-spacing:0.08em; color:#7A8199; margin-bottom:12px;}
-  .model-card h3{font-family:'Space Grotesk'; font-weight:500; font-size:16.5px; margin-bottom:8px;}
-  .model-card p{font-size:13px; line-height:1.6; color:var(--muted-on-dark);}
-  @media (prefers-reduced-motion: reduce){
-    .phase-row, .model-card{opacity:1; transform:none; transition:none;}
-  }
-  @media (max-width:900px){
-    .deploy-body{grid-template-columns:1fr; gap:48px;}
-  }
-
-  /* ---------------- SECTORS ---------------- */
-  .sectors{background:var(--gray-50); padding:120px 48px;}
-  .sectors-grid{max-width:1180px; margin:0 auto; display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
-  .sector-item{background:var(--paper); padding:38px 34px;}
-  .sector-item .snum{font-family:'IBM Plex Mono'; font-size:10.5px; color:var(--accent); display:block; margin-bottom:14px;}
-  .sector-item h3{font-family:'Space Grotesk'; font-weight:500; font-size:19px; margin-bottom:12px;}
-  .sector-item p{font-size:14px; line-height:1.65; color:var(--ink-soft);}
-
-  /* ---------------- FOOTER ---------------- */
-  footer{background:var(--ink); color:var(--paper-text); padding:60px 48px 30px;}
-  .footer-top{max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:48px; padding-bottom:36px; border-bottom:1px solid var(--line-on-dark); margin-bottom:22px;}
-  .footer-brand p{font-size:12.5px; color:#7A7F8C; max-width:280px; line-height:1.6;}
-  .footer-col h4{font-family:'IBM Plex Mono'; font-size:10px; letter-spacing:0.06em; color:#5B6072; text-transform:uppercase; margin-bottom:14px;}
-  .footer-col a{display:block; font-size:13px; color:#B8BCC8; text-decoration:none; margin-bottom:9px;}
-  .footer-bottom{max-width:1180px; margin:0 auto; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;}
-  .footer-bottom .tagline{font-family:'Space Grotesk'; font-size:12.5px; color:#7A7F8C;}
-  .footer-bottom .copyright{font-family:'IBM Plex Mono'; font-size:10.5px; color:#4C5062;}
-
-  /* ---------------- RESPONSIVE ---------------- */
-  @media (max-width:900px){
-    nav{padding:12px 18px; margin:0 10px;}
-    .menu-top{padding:14px 20px;}
-    .menu-body{grid-template-columns:1fr; gap:40px; padding:48px 20px 60px;}
-    .menu-about{border-left:none; padding-left:0; border-top:1px solid var(--line); padding-top:32px;}
-    .menu-footer{padding:20px 20px;}
-    .hero-wrap{padding:4px 8px 0;}
-    .hero{padding:32px 24px 0; min-height:auto; border-radius:10px;}
-    .hero-head{flex-direction:column; align-items:flex-start;}
-    .hero-actions{width:100%;}
-    .hero-actions a{flex:1; text-align:center;}
-    .hero-cols{grid-template-columns:1fr; gap:20px;}
-    .hero-corner{display:none;}
-    .hero-meta{flex-direction:column; align-items:flex-start; gap:6px; margin-top:28px;}
-    .declaration, .caps, .sectors{padding-left:20px; padding-right:20px;}
-    .decl-grid{grid-template-columns:1fr; gap:32px;}
-    .caps-list{grid-template-columns:1fr;}
-    .deploy-inner{padding:72px 20px;}
-    .deploy-head{margin-bottom:40px;}
-    .sectors-grid{grid-template-columns:1fr;}
-    .footer-top{grid-template-columns:1fr; gap:28px;}
-  }
-
-  /* ---------------- PANEL "INICIAR UN PROYECTO" (reemplaza la página /solicitar/) ---------------- */
-  .req-overlay{position:fixed; inset:0; background:rgba(8,9,11,0.55); backdrop-filter:blur(2px); z-index:998; opacity:0; pointer-events:none; transition:opacity .3s ease;}
-  .req-overlay.is-open{opacity:1; pointer-events:auto;}
-  .req-drawer{
-    position:fixed; top:0; right:0; height:100%; width:min(460px,100%);
-    background:#F3F2EE; color:#14161A; z-index:999;
-    box-shadow:-24px 0 60px rgba(0,0,0,0.25);
-    transform:translateX(100%); transition:transform .4s cubic-bezier(0.16,1,0.3,1);
-    display:flex; flex-direction:column; overflow-y:auto;
-    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-  }
-  .req-drawer.is-open{transform:translateX(0);}
-  .req-drawer-head{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; padding:32px 32px 20px; border-bottom:1px solid rgba(20,22,26,0.1);}
-  .req-eyebrow{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#6B6F7C; margin-bottom:10px;}
-  .req-drawer-head h3{font-size:21px; font-weight:600; letter-spacing:-0.01em; line-height:1.25; margin:0; color:#14161A;}
-  .req-close{background:none; border:1px solid rgba(20,22,26,0.16); color:#14161A; width:34px; height:34px; border-radius:50%; cursor:pointer; font-size:15px; flex-shrink:0; transition:.15s;}
-  .req-close:hover{background:rgba(20,22,26,0.06);}
-  .req-drawer-body{padding:26px 32px 40px; display:flex; flex-direction:column; gap:18px;}
-  .req-lede{font-size:14px; line-height:1.6; color:#5B5850; margin:0 0 4px;}
-  .req-field{display:flex; flex-direction:column; gap:8px;}
-  .req-field label{font-size:12px; font-weight:500; color:#3A3F49; display:flex; justify-content:space-between; gap:8px;}
-  .req-field label em{color:#B3261E; font-style:normal;}
-  .req-field input, .req-field select, .req-field textarea{
-    background:#FFFFFF; border:1px solid rgba(20,22,26,0.16); color:#14161A;
-    border-radius:10px; padding:12px 14px; font-size:14px; font-family:inherit;
-    transition:border-color .15s ease;
-  }
-  .req-field input:focus, .req-field select:focus, .req-field textarea:focus{outline:none; border-color:#2F4BFF;}
-  .req-field.err input, .req-field.err textarea{border-color:#B3261E;}
-  .req-field textarea{resize:vertical; min-height:110px;}
-  .req-count{font-weight:400; color:#8A8A86; font-size:11px;}
-  .req-submit{
-    background:#2F4BFF; color:#fff; border:none; border-radius:999px; padding:14px 22px;
-    font-size:14px; font-weight:500; cursor:pointer; transition:background .15s ease; margin-top:6px;
-  }
-  .req-submit:hover{background:#1B2C99;}
-  .req-submit:disabled{opacity:.7; cursor:default;}
-  .req-msg{font-family:'JetBrains Mono',monospace; font-size:12px; min-height:16px;}
-  .req-note{font-size:11px; color:#8A8A86; line-height:1.5;}
-  .req-success{position:absolute; inset:0; z-index:5; display:flex; align-items:center; justify-content:center; pointer-events:none; overflow:hidden;}
-  .req-success.is-active{pointer-events:auto;}
-  .req-success-circle{position:absolute; inset:0; background:#2E6B45; clip-path:circle(0% at 50% 100%); transition:clip-path .8s cubic-bezier(0.16,1,0.3,1);}
-  .req-success.is-active .req-success-circle{clip-path:circle(150vmax at 50% 100%);}
-  .req-success-close{
-    position:absolute; top:24px; right:24px; z-index:2;
-    background:none; border:1px solid rgba(255,255,255,0.4); color:#fff;
-    width:34px; height:34px; border-radius:50%; cursor:pointer; font-size:15px;
-    opacity:0; transition:opacity .3s ease .55s, background .15s ease;
-  }
-  .req-success.is-active .req-success-close{opacity:1;}
-  .req-success-close:hover{background:rgba(255,255,255,0.15);}
-  .req-success-content{position:relative; z-index:1; text-align:center; opacity:0; transform:translateY(14px); transition:opacity .4s ease .4s, transform .4s ease .4s; padding:0 32px;}
-  .req-success.is-active .req-success-content{opacity:1; transform:translateY(0);}
-  .req-success-check{width:56px; height:56px; border-radius:50%; border:2px solid #fff; color:#fff; font-size:26px; display:flex; align-items:center; justify-content:center; margin:0 auto 18px;}
-  .req-success-msg{color:#fff; font-size:19px; font-weight:600; margin-bottom:8px;}
-  .req-success-folio{color:rgba(255,255,255,0.85); font-family:'JetBrains Mono',monospace; font-size:12.5px; margin-bottom:14px;}
-  .req-success-hint{color:rgba(255,255,255,0.75); font-size:12.5px; line-height:1.5; max-width:260px; margin:0 auto;}
-  @media (prefers-reduced-motion:reduce){ .req-success-circle{transition:none;} .req-success-content{transition:none;} .req-success-close{transition:none;} }
-  @media (max-width:560px){ .req-drawer{width:100%;} }
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
 
-<nav>
-  <div class="nav-left">
-    <img class="logo-mark" src="/assets/img/pahlass-logo-black.png" alt="Pahlass">
-  </div>
-  <div class="nav-right">
-    <a href="#" class="nav-cta js-open-request">Iniciar un proyecto</a>
-    <button type="button" class="nav-icon" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="menuOverlay">
-      <span class="burger"><span></span><span></span></span>
-    </button>
-  </div>
-</nav>
 
-<div class="menu-overlay" id="menuOverlay" aria-hidden="true">
-  <div class="menu-top">
-    <div class="nav-left">
-      <img class="logo-mark" src="/assets/img/pahlass-logo-black.png" alt="Pahlass">
+<div style="background: #08090B; color: #FFFFFF; font-family: 'Inter Tight', system-ui, sans-serif; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased">
+
+<!-- ═════════════ PORTADA ═════════════ -->
+<div class="ac" id="ac" hidden aria-label="Acerca de Pahlass">
+  <header class="ac2-hero ac3-hero" data-tono="oscuro">
+    
+    <div class="ac2-in ac2-hin">
+      <div class="ac2-hmeta"><span>ACERCA DE PAHLASS</span><span>EL MODELO DE DATOS DETRÁS DE CADA DECISIÓN</span></div>
+      <h1>Por qué<br>estamos aquí</h1>
+      <div class="ac3-hpie"><p class="ac2-lema">Creemos en potenciar las decisiones de las personas, no en reemplazarlas.</p><nav class="ac3-ind" aria-label="Capítulos"><small>ÍNDICE</small><a href="#" data-cap="0"><span>01</span>Lo que hacemos</a><a href="#" data-cap="1"><span>02</span>Nuestra gente</a><a href="#" data-cap="2"><span>03</span>Cómo trabajamos</a><a href="#" data-cap="3"><span>04</span>Responsabilidad</a><a href="#" data-cap="4"><span>05</span>A quién servimos</a><a href="#" data-cap="5"><span>06</span>Hacia dónde vamos</a></nav></div>
     </div>
-    <button type="button" class="nav-icon" id="menuClose" aria-label="Cerrar menú">
-      <span class="burger" style="transform:rotate(45deg)"><span style="top:4.75px"></span><span style="top:4.75px; transform:rotate(90deg)"></span></span>
-    </button>
-  </div>
-  <div class="menu-body">
-    <div class="menu-links" role="navigation" aria-label="Navegación principal">
-      <a href="#caps">Capacidades</a>
-      <a href="#sectors">Sectores</a>
-      <a href="mailto:acceso@pahlass.com">Contacto</a>
+  </header>
+  <section class="ac2-origen" data-tono="claro"><div class="ac2-in">
+    <small class="ac2-ey">EL ORIGEN</small>
+    <p class="ac2-frase" id="acFrase"><span>Toda</span> <span>organización</span> <span>ya</span> <span>tiene</span> <span>los</span> <span>datos</span> <span>que</span> <span>necesita</span> <span>para</span> <span>decidir</span> <span>mejor.</span> <span>Lo</span> <span>que</span> <span>le</span> <span>falta</span> <span>es</span> <span>el</span> <span>modelo</span> <span>que</span> <span>los</span> <span>ordena.</span></p>
+    <div class="ac2-dos">
+      <p class="rv">Al mirar cómo operaban las organizaciones a nuestro alrededor, vimos lo mismo una y otra vez: software genérico demasiado rígido para adaptarse a cada negocio, sistemas hechos a la medida que tardaban demasiado en implementarse y costaban demasiado mantener, y herramientas de análisis que graficaban datos que nadie había ordenado.</p>
+      <p class="rv">Vimos directores decidiendo con reportes que llegaban tarde, áreas con versiones distintas del mismo número y la información más valiosa de cada organización repartida entre hojas de cálculo, sistemas aislados y la memoria de quien llevaba años en el puesto.</p>
     </div>
-    <div class="menu-about">
-      <div class="sec-label"><span class="dash"></span>Acerca de</div>
-      <p>Pahlass es una empresa privada de tecnología e ingeniería de software. Diseñamos, desarrollamos, integramos y operamos soluciones digitales para empresas, instituciones y organizaciones con necesidades específicas.</p>
-      <p>Nuestro trabajo reúne software, infraestructura, automatización, datos e inteligencia artificial para construir sistemas funcionales, seguros y preparados para evolucionar.</p>
-      <a href="/admin/" class="menu-access">Acceso</a>
+    <p class="ac2-fund rv">Detectamos la necesidad de una forma distinta de trabajar con datos, y sabíamos que se necesitaba una empresa distinta para construirla. <b>Por eso fundamos Pahlass.</b></p>
+  </div></section>
+  
+  <section data-ci="0" class="ac2-cap" data-tono="claro"><div class="ac2-in ac2-capg">
+    <div class="ac2-num"><span class="ac2-n">01</span><span class="ac2-et">Lo que hacemos</span></div>
+    <div class="ac2-txt">
+      <h2 class="rv">Construimos el modelo de datos detrás de cada decisión.</h2><p class="rv">Nos enfocamos en crear la mejor experiencia para trabajar con datos: una que permita a cualquier persona de la organización formular y responder preguntas complejas sobre su negocio, sin dominar lenguajes de consulta, modelos estadísticos ni líneas de comando.</p><p class="rv">Para lograrlo, construimos una plataforma donde la organización captura su operación desde el origen, organiza su información en un modelo de datos propio y la explora con analítica nativa, sin depender de herramientas externas.</p>
+      <a class="ac2-l rv" href="#plataforma">Conoce la plataforma <em>→</em></a>
+    </div></div></section>
+  <section data-ci="1" class="ac2-cap" data-tono="claro"><div class="ac2-in ac2-capg">
+    <div class="ac2-num"><span class="ac2-n">02</span><span class="ac2-et">Nuestra gente</span></div>
+    <div class="ac2-txt">
+      <h2 class="rv">Somos ingenieros, no consultores.</h2><p class="rv">Nuestro equipo combina experiencia en arquitectura de datos, desarrollo de software, diseño de experiencia y análisis de negocio. Sin importar su función, cada persona en Pahlass trabaja con una mentalidad de ingeniería rigurosa y un enfoque firme en que las cosas funcionen en la operación real.</p><p class="rv">No entregamos recomendaciones en una presentación. Entregamos sistemas que la organización usa todos los días.</p>
+      
+    </div></div></section>
+  <section class="ac3-int" data-tono="oscuro" id="acInt"><div class="ac2-in">
+      <small class="ac2-ey ac3-ey">UN PRINCIPIO</small>
+      <div class="ac3-pal"><span>Los datos</span><span>no deciden.</span><span>Las personas, sí.</span></div>
+    </div></section>
+  
+  <section data-ci="2" class="ac2-cap" data-tono="claro"><div class="ac2-in ac2-capg">
+    <div class="ac2-num"><span class="ac2-n">03</span><span class="ac2-et">Cómo trabajamos</span></div>
+    <div class="ac2-txt">
+      <h2 class="rv">Vamos a donde ocurre la operación.</h2><p class="rv">Nuestros clientes conocen su negocio mejor que nadie. Nosotros tenemos una plataforma probada y la ingeniería para adaptarla. Por eso nuestros ingenieros trabajan en sitio, junto a quienes operan: entienden cómo funciona cada área, migran la información, configuran las reglas del negocio y ponen el sistema en operación.</p><p class="rv">Y no se van. Nuestro trabajo empieza cuando el sistema entra en operación, y no termina mientras la organización siga creciendo: nuevas reglas, nuevas sucursales, nuevas preguntas.</p>
+      <a class="ac2-l rv" href="#industrias-esc">Ve cómo lo hacemos en cada industria <em>→</em></a>
+    </div></div></section>
+  <section data-ci="3" class="ac2-cap ac2-inv" data-tono="oscuro"><div class="ac2-in ac2-capg">
+    <div class="ac2-num"><span class="ac2-n">04</span><span class="ac2-et">Responsabilidad</span></div>
+    <div class="ac2-txt">
+      <h2 class="rv">Protegemos la información de las personas.</h2><p class="rv">Una plataforma que concentra la operación de una organización concentra también información sensible: datos de alumnos, de pacientes, de empleados y de clientes. Tratarla con cuidado no es una función adicional; es parte del diseño.</p><p class="rv">Por eso los permisos se aplican desde la base de datos, registro por registro; cada cambio queda registrado con su responsable; y los datos pertenecen siempre a la organización, que puede exportarlos completos cuando lo decida.</p>
+      <a class="ac2-l rv" href="#caso/seguridad">Cómo protegemos los datos <em>→</em></a>
+    </div></div></section>
+  <section data-ci="4" class="ac2-cap" data-tono="claro"><div class="ac2-in ac2-capg">
+    <div class="ac2-num"><span class="ac2-n">05</span><span class="ac2-et">A quién servimos</span></div>
+    <div class="ac2-txt">
+      <h2 class="rv">Vamos a donde más se nos necesita.</h2><p class="rv">Buscamos a las organizaciones que sostienen la economía real, sin importar su industria ni su tamaño: las que toman decisiones importantes todos los días y que casi nunca tienen acceso a la tecnología que usan las más grandes.</p><p class="rv">Con todas trabajamos igual: construyendo una relación que transforme la forma en que usan sus datos para cumplir lo que se proponen.</p>
+      
+    </div></div></section>
+  <section data-ci="5" class="ac2-vis ac3-vis" data-tono="oscuro">
+    
+    <div class="ac2-in ac2-vin">
+      <div class="ac2-num ac2-num-o"><span class="ac2-n">06</span><span class="ac2-et">Hacia dónde vamos</span></div>
+      <p class="ac2-vbig rv">Estamos construyendo un futuro en el que una escuela, una clínica, una constructora o una cadena de tiendas puedan usar sus datos con la misma precisión que las organizaciones más grandes del mundo.</p>
+      <p class="ac2-vtx rv">Para cumplir con su misión, para ofrecer más valor a sus clientes y para cuidar mejor a las personas a las que sirven. Y esto es solo el comienzo.</p>
+      <div class="ac2-cta rv"><a href="#contacto" class="ac2-b1">Hablemos <em>→</em></a><a href="#prensa" class="ac2-b2">Sala de prensa <em>→</em></a></div>
     </div>
-  </div>
-  <div class="menu-footer">
-    <span>PAHLASS-CORE / ARCHITECTURE</span>
-    <a href="mailto:acceso@pahlass.com">acceso@pahlass.com</a>
-  </div>
+  </section>
 </div>
+<div id="pfoto-acomp" hidden><img src="assets/img/acompanamiento.jpg" alt="" decoding="async"></div>
+<div id="industrias-esc-img" hidden><a class="esc-f" hidden href="#caso/manufactura" aria-label="Manufactura: La capacidad que una planta pierde todos los días, por fin a la vista."><img src="assets/videos/aereo.jpg" alt="" decoding="async"></a><a class="esc-f" hidden href="#caso/comercio" aria-label="Comercio: Capital liberado del inventario que no se vende."><img src="assets/img/comercio.jpg" alt="" decoding="async"></a><a class="esc-f" hidden href="#caso/servicios" aria-label="Servicios: Servicios técnicos que se resuelven en la primera visita."><img src="assets/videos/casa.jpg" alt="" decoding="async"></a><a class="esc-f" hidden href="#caso/finanzas" aria-label="Finanzas: Un cierre de mes que ya no espera al fin de mes."><img src="assets/videos/oficina.jpg" alt="" decoding="async"></a></div>
+<div class="pd" id="pd" hidden aria-label="Producto"></div>
+<div class="sp" id="sp" hidden aria-label="Sala de prensa"></div>
+<div class="cs" id="cs" hidden></div>
+<!-- ═════════════ CABECERA FIJA ═════════════ -->
+<header class="cb" id="cb">
+  <div class="cb-barra">
+    <a class="cb-logo" href="#inicio" aria-label="Pahlass, inicio"><img class="lg-os" src="assets/img/pahlass-logo-dark.png" alt="Pahlass" decoding="async"><img class="lg-cl" src="assets/img/pahlass-logo-light.png" alt="" aria-hidden="true" decoding="async"></a>
+    <span class="cb-sp"></span>
+    <a class="cb-cta" href="#contacto">Comenzar</a>
+    <div class="cb-ic">
+      <button type="button" id="cbBuscar" aria-label="Buscar" aria-expanded="false"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="13.5" cy="10.5" r="6"/><path d="M9.2 14.8 4 20"/></svg></button>
+      <button type="button" id="cbMenu" aria-label="Menú" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </div>
+  </div>
+  <div class="cb-panel" id="cbPanel" hidden>
+    <label class="cb-busca"><span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="13.5" cy="10.5" r="6"/><path d="M9.2 14.8 4 20"/></svg></span><input id="cbQ" placeholder="Buscar secciones o industrias" autocomplete="off"></label>
+    <div class="cb-cols">
+      <nav class="cb-nav" aria-label="Secciones"><a class="cb-l" href="#plataforma" data-q="Plataforma Del origen a la decisión"><span>Plataforma</span><em>Del origen a la decisión</em></a><a class="cb-l" href="#industrias-esc" data-q="Industrias Un modelo para cada industria"><span>Industrias</span><em>Un modelo para cada industria</em></a><a class="cb-l" href="#despliegue" data-q="Despliegue Ingeniería en sitio"><span>Despliegue</span><em>Ingeniería en sitio</em></a><a class="cb-l" href="#capacidades" data-q="Capacidades Lo que hace el sistema"><span>Capacidades</span><em>Lo que hace el sistema</em></a><a class="cb-l" href="#compania" data-q="Compañía Quiénes somos"><span>Compañía</span><em>Quiénes somos</em></a><a class="cb-l" href="#producto/coppermind" data-q="Coppermind producto registro orden datos memoria"><span>Coppermind</span><em>La memoria de tu organización</em></a><a class="cb-l" href="#producto/diagram" data-q="Diagram producto análisis tableros comparativos BI decisiones"><span>Diagram</span><em>El plan para decidir</em></a><a class="cb-l" href="#acerca" data-q="Acerca de Pahlass nosotros misión equipo"><span>Acerca de</span><em>Por qué estamos aquí</em></a><a class="cb-l" href="#prensa" data-q="Sala de prensa noticias casos artículos investigación"><span>Sala de prensa</span><em>Casos, artículos e investigación</em></a><a class="cb-l" href="#contacto" data-q="Contacto Hablemos de tu operación"><span>Contacto</span><em>Hablemos de tu operación</em></a></nav>
+      <div class="cb-inds"><small>INDUSTRIAS</small><div><button type="button" class="cb-i" data-slug="manufactura" data-q="Manufactura industria">Manufactura</button><button type="button" class="cb-i" data-slug="agroindustria" data-q="Agroindustria industria">Agroindustria</button><button type="button" class="cb-i" data-slug="construccion" data-q="Construcción industria">Construcción</button><button type="button" class="cb-i" data-slug="comercio" data-q="Comercio industria">Comercio</button><button type="button" class="cb-i" data-slug="ferreteria" data-q="Ferretería industria">Ferretería</button><button type="button" class="cb-i" data-slug="salud" data-q="Salud industria">Salud</button><button type="button" class="cb-i" data-slug="educacion" data-q="Educación industria">Educación</button><button type="button" class="cb-i" data-slug="servicios" data-q="Servicios industria">Servicios</button><button type="button" class="cb-i" data-slug="finanzas" data-q="Finanzas industria">Finanzas</button><button type="button" class="cb-i" data-slug="direccion" data-q="Inteligencia de negocio analítica BI tableros industria">Inteligencia de negocio</button><button type="button" class="cb-i" data-slug="seguridad" data-q="Seguridad de datos seguridad privacidad permisos industria">Seguridad de datos</button></div></div>
+    </div>
+    <p class="cb-vacio" id="cbVacio" hidden>Sin resultados.</p>
+  </div>
+</header>
+<section id="inicio" style="position: relative; min-height: 920px; display: flex; flex-direction: column; overflow: hidden">
+  <div class="reel" aria-hidden="true"><div class="sl on" data-s="Manufactura" data-v="aereo"><video muted playsinline preload="auto" poster="assets/videos/aereo.jpg" src="assets/videos/aereo.mp4"></video></div><div class="sl" data-s="Dirección" data-v="equipo"><video muted playsinline preload="metadata" poster="assets/videos/equipo.jpg" src="assets/videos/equipo.mp4"></video></div><div class="sl" data-s="Agroindustria" data-v="agro"><video muted playsinline preload="metadata" poster="assets/videos/agro.jpg" src="assets/videos/agro.mp4"></video></div><div class="sl" data-s="Análisis" data-v="analisis"><video muted playsinline preload="metadata" poster="assets/videos/analisis.jpg" src="assets/videos/analisis.mp4"></video></div><div class="sl" data-s="Construcción" data-v="construccion"><video muted playsinline preload="metadata" poster="assets/videos/construccion.jpg" src="assets/videos/construccion.mp4"></video></div><div class="sl" data-s="Comercio" data-v="moda"><video muted playsinline preload="metadata" poster="assets/videos/moda.jpg" src="assets/videos/moda.mp4"></video></div><div class="sl" data-s="Comercio" data-v="ferreteria"><video muted playsinline preload="metadata" poster="assets/videos/ferreteria.jpg" src="assets/videos/ferreteria.mp4"></video></div><div class="sl" data-s="Administración" data-v="oficina"><video muted playsinline preload="metadata" poster="assets/videos/oficina.jpg" src="assets/videos/oficina.mp4"></video></div><div class="sl" data-s="Salud" data-v="salud"><video muted playsinline preload="metadata" poster="assets/videos/salud.jpg" src="assets/videos/salud.mp4"></video></div><div class="sl" data-s="Servicios" data-v="casa"><video muted playsinline preload="metadata" poster="assets/videos/casa.jpg" src="assets/videos/casa.mp4"></video></div></div>
+  <div class="tinte t-color" aria-hidden="true"></div>
+  <div class="tinte t-brillo" aria-hidden="true"></div>
+  <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(3,4,6,.94) 0%, rgba(3,4,6,.74) 38%, rgba(3,4,6,.42) 70%, rgba(3,4,6,.3) 100%)"></div>
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 320px; background: linear-gradient(0deg, #08090B 0%, rgba(8,9,11,0) 100%)"></div>
+  
 
-<!-- ================= HERO ================= -->
-<div class="hero-wrap">
-<section class="hero">
-  <canvas class="hero-dots" id="heroDots" aria-hidden="true"></canvas>
-  <span class="hero-corner tl">+</span>
-  <span class="hero-corner tr">+</span>
-  <span class="hero-corner bl">+</span>
-  <span class="hero-corner br">+</span>
-  <div class="hero-top">
-    <div class="hero-badge load-in" style="transition-delay:0.05s;"><span class="blink"></span>Ingeniería y arquitectura de datos</div>
-    <div class="hero-head">
-      <h1 class="load-in" style="transition-delay:0.15s;">La arquitectura que conecta toda tu operación.</h1>
-      <div class="hero-actions load-in" style="transition-delay:0.25s;">
-        <a href="#" class="btn-primary js-open-request">Solicitar diagnóstico</a>
-        <a href="/modelo/" class="btn-ghost">Ver el modelo →</a>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div class="hero-divider load-in" style="transition-delay:0.3s;"></div>
-    <div class="hero-cols load-in" style="transition-delay:0.35s;">
-      <p>Integramos tus sistemas, datos y proveedores en una sola arquitectura operativa — sin fricción entre herramientas.</p>
-      <p>Diseñamos la infraestructura de datos que sostiene decisiones en tiempo real, no reportes que llegan tarde.</p>
-      <p>Cada sistema que construimos queda documentado, monitoreado y respaldado — nunca es una caja negra.</p>
-    </div>
-  </div>
-  <div class="hero-meta">
-    <span>PAHLASS-CORE <span class="sep">/</span> <b>DATA ARCHITECTURE</b> <span class="sep">/</span> INGENIERÍA, INTEGRACIÓN, OPERACIÓN</span>
-    <span>BUILD <b>2026.08</b> <span class="sep">/</span> REV.02</span>
-  </div>
-</section>
-</div>
 
-<!-- ================= FIELD EXPAND (imagen que se expande al hacer scroll) ================= -->
-<section class="field-expand">
-  <div class="field-expand-head">
-    <div class="sec-label"><span class="dash"></span>En el terreno</div>
-    <h2>Construimos donde ocurre la operación, no solo donde se ve la pantalla.</h2>
-  </div>
-  <div class="field-stage" id="fieldStage">
-    <div class="field-pin">
-      <div class="field-media" id="fieldMedia">
-        <img src="/assets/img/agricultura.jpg" alt="" loading="lazy">
-      </div>
-    </div>
-  </div>
-</section>
+  
 
-<!-- ================= DECLARATION ================= -->
-<section class="declaration">
-  <p class="decl-huge"><span class="fade">Pahlass diseña, desarrolla e implementa los sistemas, plataformas e infraestructura digital que</span> <span class="accent">sostienen la operación real</span><span class="fade"> de empresas, instituciones y organizaciones.</span></p>
-  <div class="decl-grid">
-    <p class="decl-quote">No adaptamos el problema al software. <span class="accent">Construimos el software alrededor del problema.</span></p>
-    <div class="decl-panel">
-      <p>Participamos en cada etapa: análisis, arquitectura, desarrollo, implementación y operación continua — sin entregar el proyecto a la mitad del camino.</p>
-      <p>Medimos el resultado en la operación diaria, no en la demostración.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CAPABILITIES ================= -->
-<section class="caps" id="caps">
-  <div class="sec-head" style="max-width:1180px; margin-left:auto; margin-right:auto;">
-    <div class="sec-label"><span class="dash"></span>Capacidades</div>
-    <h2>Ingeniería aplicada a problemas específicos.</h2>
-  </div>
-  <div class="caps-list">
-    <div class="cap-item">
-      <svg class="cap-icon" viewBox="0 0 34 34" fill="none" stroke="#2F4BFF" stroke-width="1.4"><rect x="4" y="4" width="26" height="26"/><path d="M11 13l-4 4 4 4M23 13l4 4-4 4M19 11l-4 12"/></svg>
-      <span class="capnum">01</span>
-      <h3>Desarrollo de software</h3>
-      <p>Plataformas web, aplicaciones empresariales, herramientas internas y sistemas administrativos a medida.</p>
-      <div class="cap-readout"><span>REF 01.SW</span><span class="bar"><span class="bar-fill" style="width:82%;"></span></span><span>82%</span></div>
-    </div>
-    <div class="cap-item">
-      <svg class="cap-icon" viewBox="0 0 34 34" fill="none" stroke="#2F4BFF" stroke-width="1.4"><circle cx="9" cy="9" r="4"/><circle cx="25" cy="9" r="4"/><circle cx="17" cy="25" r="4"/><path d="M12 11l3 11M22 11l-3 11M13 9h8"/></svg>
-      <span class="capnum">02</span>
-      <h3>Integración de sistemas</h3>
-      <p>Conexión de bases de datos, servicios y herramientas de terceros con la operación existente.</p>
-      <div class="cap-readout"><span>REF 02.IN</span><span class="bar"><span class="bar-fill" style="width:68%;"></span></span><span>68%</span></div>
-    </div>
-    <div class="cap-item">
-      <svg class="cap-icon" viewBox="0 0 34 34" fill="none" stroke="#2F4BFF" stroke-width="1.4"><path d="M6 17a11 11 0 0 1 20-6M28 17a11 11 0 0 1-20 6"/><path d="M22 8l4 3-4 2M12 26l-4-3 4-2"/></svg>
-      <span class="capnum">03</span>
-      <h3>Automatización</h3>
-      <p>Digitalización de procesos, flujos de trabajo, generación documental y seguimiento operativo.</p>
-      <div class="cap-readout"><span>REF 03.AU</span><span class="bar"><span class="bar-fill" style="width:74%;"></span></span><span>74%</span></div>
-    </div>
-    <div class="cap-item">
-      <svg class="cap-icon" viewBox="0 0 34 34" fill="none" stroke="#2F4BFF" stroke-width="1.4"><circle cx="17" cy="17" r="4"/><path d="M17 4v6M17 24v6M4 17h6M24 17h6M8 8l4 4M22 22l4 4M26 8l-4 4M12 22l-4 4"/></svg>
-      <span class="capnum">04</span>
-      <h3>Inteligencia artificial aplicada</h3>
-      <p>Asistentes, análisis, clasificación y búsqueda documental integrados en procesos controlados.</p>
-      <div class="cap-readout"><span>REF 04.AI</span><span class="bar"><span class="bar-fill" style="width:59%;"></span></span><span>59%</span></div>
-    </div>
-    <div class="cap-item">
-      <svg class="cap-icon" viewBox="0 0 34 34" fill="none" stroke="#2F4BFF" stroke-width="1.4"><rect x="6" y="5" width="22" height="7"/><rect x="6" y="14" width="22" height="7"/><rect x="6" y="23" width="22" height="6"/><circle cx="10" cy="8.5" r="1.2" fill="#2F4BFF"/><circle cx="10" cy="17.5" r="1.2" fill="#2F4BFF"/></svg>
-      <span class="capnum">05</span>
-      <h3>Infraestructura digital</h3>
-      <p>Configuración y administración de hosting, servidores, despliegues y entornos productivos.</p>
-      <div class="cap-readout"><span>REF 05.IF</span><span class="bar"><span class="bar-fill" style="width:91%;"></span></span><span>91%</span></div>
-    </div>
-    <div class="cap-item">
-      <svg class="cap-icon" viewBox="0 0 34 34" fill="none" stroke="#2F4BFF" stroke-width="1.4"><path d="M17 4a13 13 0 1 0 13 13"/><path d="M17 4v13l9 5"/></svg>
-      <span class="capnum">06</span>
-      <h3>Operación tecnológica</h3>
-      <p>Mantenimiento, soporte, monitoreo, seguridad y evolución continua de los sistemas.</p>
-      <div class="cap-readout"><span>REF 06.OP</span><span class="bar"><span class="bar-fill" style="width:77%;"></span></span><span>77%</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CHIP MARQUEE ================= -->
-<section class="chip-marquee" aria-hidden="true">
-  <div class="marquee-row">
-    <div class="marquee-track" style="animation-duration:36s;">
-      <span class="marquee-chip">CRM</span>
-      <span class="marquee-chip">ERP</span>
-      <span class="marquee-chip">Dashboards</span>
-      <span class="marquee-chip">Portales de clientes</span>
-      <span class="marquee-chip">Aplicaciones móviles</span>
-      <span class="marquee-chip">Plataformas web</span>
-      <span class="marquee-chip">Automatización</span>
-      <span class="marquee-chip">Inteligencia artificial</span>
-      <span class="marquee-chip">Gestión de proyectos</span>
-      <span class="marquee-chip">Inventarios</span>
-      <span class="marquee-chip">CRM</span>
-      <span class="marquee-chip">ERP</span>
-      <span class="marquee-chip">Dashboards</span>
-      <span class="marquee-chip">Portales de clientes</span>
-      <span class="marquee-chip">Aplicaciones móviles</span>
-      <span class="marquee-chip">Plataformas web</span>
-      <span class="marquee-chip">Automatización</span>
-      <span class="marquee-chip">Inteligencia artificial</span>
-      <span class="marquee-chip">Gestión de proyectos</span>
-      <span class="marquee-chip">Inventarios</span>
-    </div>
-  </div>
-  <div class="marquee-row marquee-reverse">
-    <div class="marquee-track" style="animation-duration:44s;">
-      <span class="marquee-chip">Logística</span>
-      <span class="marquee-chip">Ventas</span>
-      <span class="marquee-chip">Facturación</span>
-      <span class="marquee-chip">Recursos humanos</span>
-      <span class="marquee-chip">Atención al cliente</span>
-      <span class="marquee-chip">Reservaciones</span>
-      <span class="marquee-chip">Educación</span>
-      <span class="marquee-chip">Comercio electrónico</span>
-      <span class="marquee-chip">Gestión documental</span>
-      <span class="marquee-chip">Analítica de datos</span>
-      <span class="marquee-chip">Logística</span>
-      <span class="marquee-chip">Ventas</span>
-      <span class="marquee-chip">Facturación</span>
-      <span class="marquee-chip">Recursos humanos</span>
-      <span class="marquee-chip">Atención al cliente</span>
-      <span class="marquee-chip">Reservaciones</span>
-      <span class="marquee-chip">Educación</span>
-      <span class="marquee-chip">Comercio electrónico</span>
-      <span class="marquee-chip">Gestión documental</span>
-      <span class="marquee-chip">Analítica de datos</span>
-    </div>
-  </div>
-  <div class="marquee-row">
-    <div class="marquee-track" style="animation-duration:32s;">
-      <span class="marquee-chip">Sistemas internos</span>
-      <span class="marquee-chip">Órdenes de trabajo</span>
-      <span class="marquee-chip">Control de operaciones</span>
-      <span class="marquee-chip">Integraciones</span>
-      <span class="marquee-chip">APIs</span>
-      <span class="marquee-chip">Mapas interactivos</span>
-      <span class="marquee-chip">Portales administrativos</span>
-      <span class="marquee-chip">Software bajo demanda</span>
-      <span class="marquee-chip">Plataformas SaaS</span>
-      <span class="marquee-chip">Herramientas empresariales</span>
-      <span class="marquee-chip">Sistemas internos</span>
-      <span class="marquee-chip">Órdenes de trabajo</span>
-      <span class="marquee-chip">Control de operaciones</span>
-      <span class="marquee-chip">Integraciones</span>
-      <span class="marquee-chip">APIs</span>
-      <span class="marquee-chip">Mapas interactivos</span>
-      <span class="marquee-chip">Portales administrativos</span>
-      <span class="marquee-chip">Software bajo demanda</span>
-      <span class="marquee-chip">Plataformas SaaS</span>
-      <span class="marquee-chip">Herramientas empresariales</span>
-    </div>
-  </div>
-</section>
-
-<!-- ================= DEPLOY (foto de campo + fases + modelo de colaboración) ================= -->
-<section class="deploy">
-  <img class="deploy-bg" src="/assets/img/deploy-field.jpg" alt="">
-  <div class="deploy-scrim" aria-hidden="true"></div>
-  <div class="deploy-inner">
-    <div class="deploy-head">
-      <div class="sec-label on-dark"><span class="dash"></span>En campo</div>
-      <h2>Nos desplegamos donde ocurre la operación.</h2>
-      <p class="deploy-lede">Entendemos cada organización desde el lugar donde trabaja, no solo desde una pantalla. Así diseñamos, construimos y acompañamos cada etapa del sistema.</p>
-    </div>
-    <div class="deploy-body">
-      <div class="deploy-phases" id="deployPhases">
-        <span class="deploy-col-label">Cómo trabajamos</span>
-        <div class="phase-row">
-          <span class="phase-idx">01</span>
-          <div><h3>Comprender</h3><p>Analizamos la operación, los usuarios, los sistemas actuales y el resultado que necesita alcanzarse.</p></div>
-        </div>
-        <div class="phase-row">
-          <span class="phase-idx">02</span>
-          <div><h3>Diseñar</h3><p>Definimos arquitectura, flujos de datos e integraciones, con el alcance técnico ya delimitado.</p></div>
-        </div>
-        <div class="phase-row">
-          <span class="phase-idx">03</span>
-          <div><h3>Construir</h3><p>Desarrollamos mediante ciclos progresivos de validación, con entregas revisables en cada etapa.</p></div>
-        </div>
-        <div class="phase-row">
-          <span class="phase-idx">04</span>
-          <div><h3>Desplegar</h3><p>Implementamos la solución y preparamos infraestructura, accesos y usuarios para operar.</p></div>
-        </div>
-        <div class="phase-row">
-          <span class="phase-idx">05</span>
-          <div><h3>Operar</h3><p>Mantenemos, monitoreamos y evolucionamos el sistema conforme cambian las necesidades reales.</p></div>
+  <div style="position: relative; z-index: 2; flex: 1; display: flex; align-items: center">
+    <div style="max-width: 1840px; width: 100%; margin: 0 auto; padding: 140px 50px 120px; box-sizing: border-box">
+      <div style="max-width: 960px; display: flex; flex-direction: column; gap: 36px">
+        <h1 style="margin: 0; font-size: 84px; line-height: 1.02; font-weight: 300; letter-spacing: -0.04em; max-width: 12em">Desarrollamos el modelo de datos detrás de cada decisión.</h1>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px">
+          <a class="bp" href="#contacto" style="background: #FFFFFF; color: #08090B; font-size: 15px; font-weight: 500; padding: 18px 28px; min-height: 56px; box-sizing: border-box; display: inline-flex; align-items: center; gap: 14px">Hablar con nuestro equipo <span style="font-family: 'JetBrains Mono', monospace">→</span></a>
+          <a class="bs" href="#plataforma" style="border: 1px solid rgba(255,255,255,.4); font-size: 15px; padding: 18px 28px; min-height: 56px; box-sizing: border-box; display: inline-flex; align-items: center">Conocer la plataforma</a>
         </div>
       </div>
-      <div class="deploy-models" id="deployModels">
-        <span class="deploy-col-label">Modelo de colaboración</span>
-        <div class="model-card"><span class="model-code">MODEL / SCOPE-01</span><h3>Proyecto de desarrollo</h3><p>Diseño, construcción e implementación de una solución con alcance definido.</p></div>
-        <div class="model-card"><span class="model-code">MODEL / OPS-02</span><h3>Operación tecnológica</h3><p>Mantenimiento, soporte, infraestructura, seguridad y evolución mensual de los sistemas.</p></div>
-        <div class="model-card"><span class="model-code">MODEL / UNIT-03</span><h3>Departamento externo de tecnología</h3><p>Pahlass coordina desarrollo, infraestructura y decisiones técnicas como unidad externa.</p></div>
+    </div>
+  </div>
+
+  </section>
+
+<!-- ═════════════ DECLARACIÓN ═════════════ -->
+<section id="plataforma" style="background: #EEF0F2; color: #0B0C0E">
+  <div style="max-width: 1360px; margin: 0 auto; padding: 160px 40px; display: flex; flex-wrap: wrap; gap: 64px">
+    <span style="flex: 0 0 200px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.18em; color: #5C626B; padding-top: 14px">QUÉ HACEMOS</span>
+    <div style="flex: 1 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 48px">
+      <p style="margin: 0; font-size: 44px; line-height: 1.18; font-weight: 300; letter-spacing: -0.03em">Del origen a la decisión. <span style="color: #6B717A">Capturamos tus fuentes, estructuramos tu arquitectura de datos y entregamos el software para explorarla. Todo en un solo sistema, bajo tu control.</span></p>
+      <div class="tres" id="tres"><div class="t-col"><p>Nos enfocamos en crear la mejor experiencia para trabajar con datos, con una plataforma que se adapta a tu modelo de negocio y a tu industria.</p></div><div class="t-col"><p>Construimos la arquitectura de datos completa, de extremo a extremo: desde la captura en el origen hasta el análisis.</p></div><div class="t-col"><p>Así puedes formular y responder preguntas complejas sobre tu negocio, sin dominar lenguajes de consulta, modelos estadísticos ni líneas de comando.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ PRODUCTOS ═════════════ -->
+<section class="pr" id="productos" aria-label="Productos">
+  <div class="pr-in">
+    <div class="pr-cab"><div><small>PRODUCTOS</small><h2>Dos productos. Un mismo núcleo.</h2></div>
+      <p>Empieza por ordenar tu operación con Coppermind. Cuando estés listo para decidir con datos, activa Diagram, sin migrar nada.</p></div>
+    <div class="pr-grid">
+      <a class="pr-t pr-cu" href="#producto/coppermind"><img class="pr-img" src="assets/img/coppermind.jpg" alt="" loading="lazy" decoding="async"><div class="pr-tx"><span class="pr-k">PAHLASS</span><b>Coppermind</b><em>La memoria de tu organización.</em><p>Registra, ordena y conecta la información de toda tu operación, para que nada se pierda y todo se pueda encontrar.</p><span class="pr-l">Conoce Coppermind <i>→</i></span></div></a>
+      <a class="pr-t pr-di" href="#producto/diagram"><img class="pr-img" src="assets/img/diagram.jpg" alt="" loading="lazy" decoding="async"><div class="pr-tx"><span class="pr-k">PAHLASS</span><b>Diagram</b><em>El plan para decidir.</em><p>Todo lo que guarda Coppermind, convertido en tableros, comparativos y alertas que explican qué está pasando y qué conviene hacer.</p><span class="pr-l">Conoce Diagram <i>→</i></span></div></a>
+    </div>
+  </div>
+</section>
+<!-- ═════════════ INDUSTRIAS · ESCENARIO ═════════════ -->
+<section class="ind" id="industrias-esc" aria-label="Industrias">
+  <div class="ind-in">
+    <div class="ind-top">
+      <div class="ind-chips" role="tablist" aria-label="Industrias"><button type="button" class="ich"><i></i><span>Acompañamiento</span></button><button type="button" class="ich"><i></i><span>Presentación</span></button><button type="button" class="ich"><i></i><span>Datos blindados</span></button><button type="button" class="ich"><i></i><span>Decisión con evidencia</span></button><button type="button" class="ich"><i></i><span>Becas</span></button><button type="button" class="ich"><i></i><span>Adherencia al plan</span></button><button type="button" class="ich"><i></i><span>Rendimiento de empaque</span></button><button type="button" class="ich"><i></i><span>Margen de mostrador</span></button><button type="button" class="ich"><i></i><span>Deserción escolar</span></button><button type="button" class="ich"><i></i><span>Valor ganado</span></button><button type="button" class="ich"><i></i><span>Riesgo escolar</span></button><button type="button" class="ich"><i></i><span>Inmutabilidad</span></button></div>
+      <a class="ind-ver" href="#prensa">Ver todo</a>
+    </div>
+    <div class="esc"><span class="esc-cnt" hidden></span><a class="esc-f" href="#caso/acompanamiento" aria-label="Artículo: La entrega no es el final: seguimos caminando contigo cuando todo cambia."><img src="assets/img/acompanamiento.jpg" alt="" draggable="false" loading="lazy" decoding="async"><span class="esc-et"><small>Artículo</small><b>La entrega no es el final: seguimos caminando contigo cuando todo cambia.<em>↗</em></b></span></a><a class="esc-f" href="#caso/presentacion" aria-label="Comunicado: Pahlass presenta su plataforma: el modelo de datos detrás de cada decisión."><img src="assets/img/despliegue.jpg" alt="" draggable="false" loading="lazy" style="object-position:45% 60%" decoding="async"><span class="esc-et"><small>Comunicado</small><b>Pahlass presenta su plataforma: el modelo de datos detrás de cada decisión.<em>↗</em></b></span></a><a class="esc-f" href="#caso/seguridad" aria-label="Seguridad de datos: Cada registro protegido desde la base de datos, no desde la pantalla."><img src="assets/img/seguridad.jpg" alt="" draggable="false" loading="lazy" decoding="async"><span class="esc-et"><small>Seguridad de datos</small><b>Cada registro protegido desde la base de datos, no desde la pantalla.<em>↗</em></b></span></a><a class="esc-f" href="#caso/direccion" aria-label="Inteligencia de negocio: Qué cambió en el negocio, por qué cambió y qué decidir."><img src="assets/img/inteligencia.jpg" alt="" draggable="false" loading="lazy" decoding="async"><span class="esc-et"><small>Inteligencia de negocio</small><b>Qué cambió en el negocio, por qué cambió y qué decidir.<em>↗</em></b></span></a><a class="esc-f" href="#caso/beca-regla" aria-label="Artículo: Una beca es una regla, no un monto."><div class="esc-cov t-articulo"><b>20% ≠ $700</b></div><span class="esc-et"><small>Artículo</small><b>Una beca es una regla, no un monto.<em>↗</em></b></span></a><a class="esc-f" href="#caso/salud" aria-label="Salud: Cada paciente, acompañado hasta su meta antes de que abandone su plan."><img src="assets/img/salud.jpg" alt="" draggable="false" loading="lazy" decoding="async"><span class="esc-et"><small>Salud</small><b>Cada paciente, acompañado hasta su meta antes de que abandone su plan.<em>↗</em></b></span></a><a class="esc-f" href="#caso/agroindustria" aria-label="Agroindustria: Cuánto de cada tonelada de campo termina en caja de primera."><img src="assets/img/agroindustria.jpg" alt="" draggable="false" loading="lazy" style="object-position:50% 12%" decoding="async"><span class="esc-et"><small>Agroindustria</small><b>Cuánto de cada tonelada de campo termina en caja de primera.<em>↗</em></b></span></a><a class="esc-f" href="#caso/ferreteria" aria-label="Ferretería: Margen protegido en cada venta de mostrador, en miles de artículos."><img src="assets/img/ferreteria.jpg" alt="" draggable="false" loading="lazy" decoding="async"><span class="esc-et"><small>Ferretería</small><b>Margen protegido en cada venta de mostrador, en miles de artículos.<em>↗</em></b></span></a><a class="esc-f" href="#caso/riesgo-desercion" aria-label="Investigación: Tres señales para anticipar la deserción escolar."><div class="esc-cov t-investigacion"><b>Tres señales, un índice</b></div><span class="esc-et"><small>Investigación</small><b>Tres señales para anticipar la deserción escolar.<em>↗</em></b></span></a><a class="esc-f" href="#caso/construccion" aria-label="Construcción: El valor ganado de cada obra, medido concepto por concepto."><img src="assets/img/construccion.jpg" alt="" draggable="false" loading="lazy" style="object-position:50% 0%" decoding="async"><span class="esc-et"><small>Construcción</small><b>El valor ganado de cada obra, medido concepto por concepto.<em>↗</em></b></span></a><a class="esc-f" href="#caso/educacion" aria-label="Educación: Un índice de riesgo por alumno para actuar antes de la deserción."><img src="assets/img/educacion.jpg" alt="" draggable="false" loading="lazy" decoding="async"><span class="esc-et"><small>Educación</small><b>Un índice de riesgo por alumno para actuar antes de la deserción.<em>↗</em></b></span></a><a class="esc-f" href="#caso/recibo-inmutable" aria-label="Artículo: Un recibo nunca se edita."><div class="esc-cov t-articulo"><b>Cancelar, no editar</b></div><span class="esc-et"><small>Artículo</small><b>Un recibo nunca se edita.<em>↗</em></b></span></a></div>
+  </div>
+</section>
+
+<!-- ═════════════ CAPACIDADES ═════════════ -->
+<section id="capacidades" class="cw">
+  <div class="cw-in">
+    <small class="cw-et">CAPACIDADES</small>
+    <div class="cw-fila">
+      <div class="cw-c" style="--d:0.00s"><span class="cw-n">01</span><b class="cw-w">Verdad.</b><p>Tu operación se registra desde el origen, con su responsable, su fecha y su razón. Cada corrección deja su rastro.</p></div>
+      <div class="cw-c" style="--d:0.12s"><span class="cw-n">02</span><b class="cw-w">Análisis.</b><p>Comparativos, variaciones explicadas y alertas calculadas sobre la operación en el momento en que ocurre.</p></div>
+      <div class="cw-c" style="--d:0.24s"><span class="cw-n">03</span><b class="cw-w">Seguridad.</b><p>Aislamiento por organización y permisos evaluados registro por registro. Tus datos siempre son tuyos.</p></div>
+      <div class="cw-c" style="--d:0.36s"><span class="cw-n">04</span><b class="cw-w">Contexto.</b><p>Un modelo de datos construido para tu negocio: migramos tu historial y te entregamos información limpia, lista para analizar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ DESPLIEGUE ═════════════ -->
+<section class="dsp" id="despliegue" aria-label="Ingeniería en despliegue">
+  <div class="dsp-in">
+    <div class="dsp-foto"><img src="assets/img/despliegue.jpg" alt="Ingeniero de Pahlass llegando a la operación de un cliente" loading="lazy" decoding="async"></div>
+    <div class="dsp-tj">
+      <small>INGENIERÍA EN DESPLIEGUE</small>
+      <h2>Todavía hay mucho por construir.</h2>
+      <p>Nuestros ingenieros trabajan dentro de tu operación: entienden cómo funciona, construyen el modelo de datos contigo y se quedan hasta que da resultados.</p>
+      <div class="dsp-pasos"><div class="dsp-paso" style="transition-delay:0.35s"><span>01</span><div><b>Diagnóstico en sitio</b><em>Conocemos tu operación donde ocurre, no desde una sala de juntas.</em></div></div><div class="dsp-paso" style="transition-delay:0.50s"><span>02</span><div><b>Construcción del modelo</b><em>Estructuramos tus datos y reglas junto con tu equipo.</em></div></div><div class="dsp-paso" style="transition-delay:0.65s"><span>03</span><div><b>Acompañamiento</b><em>Nos quedamos hasta que el sistema da resultados.</em></div></div></div>
+      <a class="dsp-btn" href="#contacto">Conoce cómo trabajamos <em>→</em></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ COMPAÑÍA ═════════════ -->
+<section id="compania" style="background: #EEF0F2; color: #0B0C0E">
+  <div style="max-width: 1360px; margin: 0 auto; padding: 160px 40px; display: flex; flex-wrap: wrap; gap: 64px">
+    <span style="flex: 0 0 200px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.18em; color: #5C626B; padding-top: 16px">COMPAÑÍA</span>
+    <div style="flex: 1 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 40px">
+      <p style="margin: 0; font-size: 52px; line-height: 1.1; font-weight: 300; letter-spacing: -0.035em">No vendemos software. Desplegamos capacidad operativa. Nuestro trabajo termina cuando tu organización entiende su propia operación sin depender de nosotros.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 0; border-top: 1px solid #C9CDD3">
+        <div style="padding: 24px 24px 0 0"><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #5C626B">SEDE</span><p style="margin: 8px 0 0; font-size: 17px">Culiacán, Sinaloa</p></div>
+        <div style="padding: 24px 24px 0 0"><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #5C626B">ESPECIALIDAD</span><p style="margin: 8px 0 0; font-size: 17px">Software a la medida e ingeniería de datos</p></div>
+        <div style="padding: 24px 24px 0 0"><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #5C626B">ESTADO DEL SERVICIO</span><p style="margin: 8px 0 0; font-size: 17px"><a href="https://status.pahlass.com" style="color: #0B0C0E; border-bottom: 1px solid #0B0C0E">status.pahlass.com</a></p></div>
+      </div>
+      <a href="#acerca" style="align-self: flex-start; display: inline-flex; gap: 12px; padding-bottom: 4px; border-bottom: 1px solid #0B0C0E; font-size: 16px; color: #0B0C0E">Por qué estamos aquí <span style="font-family: 'JetBrains Mono', monospace">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ CONTACTO ═════════════ -->
+<section id="contacto" style="border-bottom: 1px solid #1A1D22">
+  <div style="max-width: 1360px; margin: 0 auto; padding: 160px 40px; display: flex; flex-wrap: wrap; gap: 80px; align-items: flex-start">
+    <div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.18em; color: #7A808A">CONTACTO</span>
+      <h2 style="margin: 0; font-size: 88px; line-height: 0.98; font-weight: 300; letter-spacing: -0.045em">Hablemos de tu operación.</h2>
+      <p style="margin: 0; font-size: 19px; font-weight: 300; color: #A3A9B2; max-width: 28em">Una sesión de 45 minutos. Nos cuentas cómo trabaja tu organización y te mostramos cómo se vería en Pahlass.</p>
+      <p style="margin: 8px 0 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #7A808A">[CORREO DE CONTACTO]</p>
+    </div>
+    <div style="flex: 1 1 460px; min-width: 0; border: 1px solid #262A31; background: #0E1013">
+      <div id="fForm">
+        <form id="frm" style="padding: 40px; display: flex; flex-direction: column; gap: 22px">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 22px">
+            <label style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #A3A9B2">Nombre
+              <input name="nombre" required="required" autocomplete="name" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'Inter Tight', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #A3A9B2">Organización
+              <input name="organizacion" required="required" autocomplete="organization" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'Inter Tight', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
+            </label>
+          </div>
+          <label style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #A3A9B2">Correo
+            <input name="correo" type="email" required="required" autocomplete="email" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'Inter Tight', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #A3A9B2">Industria
+            <select name="industria" style="background: #0E1013; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'Inter Tight', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
+              <option>Educación</option>
+              <option>Salud</option>
+              <option>Comercio</option>
+              <option>Otra</option>
+            </select>
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #A3A9B2">¿Qué te gustaría resolver?
+            <textarea name="mensaje" rows="3" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'Inter Tight', sans-serif; font-size: 17px; padding: 10px 0; resize: vertical"></textarea>
+          </label>
+          <button class="bp" type="submit" style="background: #FFFFFF; color: #08090B; border: 0; font-family: 'Inter Tight', sans-serif; font-size: 15px; font-weight: 500; padding: 18px 26px; min-height: 58px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-top: 10px">Solicitar una sesión <span style="font-family: 'JetBrains Mono', monospace">→</span></button>
+          <p id="fErr" hidden style="margin:0;font-size:13px;color:#A3A9B2">No se pudo enviar. Intenta de nuevo o escríbenos a acceso@pahlass.com.</p>
+        </form>
+      </div>
+      <div id="fOk" hidden>
+        <div style="padding: 56px 40px; display: flex; flex-direction: column; gap: 18px; min-height: 460px; justify-content: center">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #7BC096; display: flex; align-items: center; gap: 10px"><span style="width: 8px; height: 8px; background: #5E9E72; display: block"></span>SOLICITUD RECIBIDA</span>
+          <span style="font-size: 36px; font-weight: 300; letter-spacing: -0.02em">Gracias, <span id="oNom"></span>.</span>
+          <span style="font-size: 17px; color: #A3A9B2">Te escribiremos en menos de un día hábil para agendar la sesión con <span id="oOrg"></span>.</span>
+          <button class="bs" type="button" id="otra" style="align-self: flex-start; background: none; border: 1px solid #3B4048; color: #FFFFFF; font-family: 'Inter Tight', sans-serif; font-size: 14px; padding: 13px 20px; min-height: 46px; cursor: pointer; margin-top: 10px">Enviar otra solicitud</button>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= SECTORS ================= -->
-<section class="sectors" id="sectors">
-  <div class="sec-head" style="max-width:1180px; margin-left:auto; margin-right:auto;">
-    <div class="sec-label"><span class="dash"></span>Sectores</div>
-    <h2>Tecnología aplicable a organizaciones reales.</h2>
-  </div>
-  <div class="sectors-grid">
-    <div class="sector-item"><span class="snum">01</span><h3>Empresas</h3><p>Software para operaciones, administración, clientes, ventas, documentos, inventarios y procesos internos.</p></div>
-    <div class="sector-item"><span class="snum">02</span><h3>Educación</h3><p>Plataformas académicas, administrativas, financieras y de comunicación institucional.</p></div>
-    <div class="sector-item"><span class="snum">03</span><h3>Organizaciones</h3><p>Sistemas para proyectos, personal, beneficiarios, recursos, evidencias y seguimiento.</p></div>
-    <div class="sector-item"><span class="snum">04</span><h3>Operaciones especializadas</h3><p>Desarrollo para procesos que no pueden resolverse con productos comerciales genéricos.</p></div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <img class="logo-mark" src="/assets/img/pahlass-logo-white.png" alt="Pahlass" style="margin-bottom:10px;">
-      <p>Private Technology and Software Engineering Company.</p>
+<!-- ═════════════ PIE ═════════════ -->
+<footer class="pp" id="pie">
+  <div class="pp-in">
+    <div class="pp-top">
+      <div><img src="assets/img/pahlass-logo-dark.png" alt="Pahlass" class="pp-logo" loading="lazy" decoding="async"><p class="pp-lema">El modelo de datos detrás de cada decisión.</p></div>
+      <a href="#contacto" class="pp-cta">Hablemos <em>→</em></a>
     </div>
-    <div class="footer-col">
-      <h4>Navegación</h4>
-      <a href="#caps">Capacidades</a>
-      <a href="#sectors">Sectores</a>
-      <a href="mailto:acceso@pahlass.com">Contacto</a>
-    </div>
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <a href="#">Privacidad</a>
-      <a href="#">Términos</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="tagline">Technology Built to Operate.</span>
-    <span class="copyright">© 2026 Pahlass. All rights reserved.</span>
+    <nav class="pp-cols" aria-label="Mapa del sitio"><div class="pp-col"><span class="pp-h">PRODUCTOS</span><a href="#producto/coppermind" class="pp-a">Coppermind</a><a href="#producto/diagram" class="pp-a">Diagram</a><a href="#productos" class="pp-a">Comparar productos</a></div><div class="pp-col"><span class="pp-h">INDUSTRIAS</span><a href="#caso/manufactura" class="pp-a">Manufactura</a><a href="#caso/agroindustria" class="pp-a">Agroindustria</a><a href="#caso/construccion" class="pp-a">Construcción</a><a href="#caso/comercio" class="pp-a">Comercio</a><a href="#caso/ferreteria" class="pp-a">Ferretería</a><a href="#caso/salud" class="pp-a">Salud</a><a href="#caso/educacion" class="pp-a">Educación</a><a href="#caso/servicios" class="pp-a">Servicios</a><a href="#caso/finanzas" class="pp-a">Finanzas</a></div><div class="pp-col"><span class="pp-h">SOLUCIONES</span><a href="#caso/direccion" class="pp-a">Inteligencia de negocio</a><a href="#caso/seguridad" class="pp-a">Seguridad de datos</a><a href="#caso/acompanamiento" class="pp-a">Acompañamiento</a></div><div class="pp-col"><span class="pp-h">SALA DE PRENSA</span><a href="#prensa" class="pp-a">Todas las publicaciones</a><a href="#prensa/caso" class="pp-a">Estudios de caso</a><a href="#prensa/comunicado" class="pp-a">Comunicados</a><a href="#prensa/articulo" class="pp-a">Artículos</a><a href="#prensa/investigacion" class="pp-a">Investigación</a></div><div class="pp-col"><span class="pp-h">COMPAÑÍA</span><a href="#acerca" class="pp-a">Acerca de</a><a href="#plataforma" class="pp-a">Plataforma</a><a href="#capacidades" class="pp-a">Capacidades</a><a href="#despliegue" class="pp-a">Cómo trabajamos</a><a href="#contacto" class="pp-a">Contacto</a><a href="https://status.pahlass.com" class="pp-a"><i class="pp-ok"></i>Estado del servicio</a></div></nav>
+    <div class="pp-fin"><span>© 2026 Pahlass Technologies. Todos los derechos reservados.</span><span>México</span></div>
   </div>
 </footer>
 
-<div class="req-overlay" id="reqOverlay"></div>
-<aside class="req-drawer" id="reqDrawer" aria-hidden="true">
-  <div class="req-drawer-head">
-    <div>
-      <div class="req-eyebrow">Formulario 14 · Inicio de proyecto</div>
-      <h3>Cuéntanos cómo opera tu organización</h3>
-    </div>
-    <button class="req-close" id="reqClose" aria-label="Cerrar" type="button">✕</button>
-  </div>
-  <div class="req-drawer-body">
-    <p class="req-lede">Con esa información diseñamos la primera propuesta de intervención tecnológica. Te contactaremos para agendar una conversación.</p>
-    <div class="req-field"><label>Nombre / Organización <em>*</em></label><input type="text" id="fOrg" placeholder="—" autocomplete="name"></div>
-    <div class="req-field"><label>Correo de contacto <em>*</em></label><input type="email" id="fMail" placeholder="—" autocomplete="email"></div>
-    <div class="req-field"><label>Teléfono <em>*</em></label><input type="tel" id="fPhone" placeholder="—" autocomplete="tel"></div>
-    <div class="req-field"><label>Tipo de necesidad</label>
-      <select id="fTipo">
-        <option>Plataforma o sistema interno</option>
-        <option>Automatización de procesos</option>
-        <option>Sitio, portal o aplicación</option>
-        <option>Infraestructura y hosting</option>
-        <option>Soporte y mantenimiento continuo</option>
-        <option>No estoy seguro</option>
-      </select>
-    </div>
-    <div class="req-field"><label>Urgencia</label>
-      <select id="fUrg">
-        <option>Sin fecha definida</option>
-        <option>Este mes</option>
-        <option>1–2 meses</option>
-        <option>3+ meses</option>
-      </select>
-    </div>
-    <div class="req-field">
-      <label>Descripción de la necesidad <em>*</em> <span class="req-count" id="reqCount">0 / 400</span></label>
-      <textarea id="fDesc" rows="5" maxlength="400" placeholder="Cómo opera tu organización hoy, qué necesita y qué te gustaría lograr."></textarea>
-    </div>
-    <button class="req-submit" id="reqSend" type="button">Enviar solicitud</button>
-    <div class="req-msg" id="reqMsg"></div>
-    <div class="req-note">Campos marcados con * obligatorios · Te contactaremos para agendar una conversación</div>
-  </div>
-  <div class="req-success" id="reqSuccess">
-    <div class="req-success-circle"></div>
-    <button class="req-success-close" id="reqSuccessClose" type="button" aria-label="Cerrar">✕</button>
-    <div class="req-success-content">
-      <div class="req-success-check">✓</div>
-      <div class="req-success-msg">Gracias. La recibimos.</div>
-      <div class="req-success-folio" id="reqSuccessFolio"></div>
-      <div class="req-success-hint">Te contactaremos pronto para agendar la conversación. Cierra esta ventana cuando quieras.</div>
-    </div>
-  </div>
-</aside>
-<script src="/assets/js/request-drawer.js"></script>
+</div>
 
-<script>
-  // load-in
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    document.querySelectorAll('.load-in').forEach(el => el.classList.add('shown'));
-  }));
-
-  // nav scroll state
-  const navEl = document.querySelector('nav');
-  function onNavScroll(){
-    if(window.scrollY > 30) navEl.classList.add('scrolled');
-    else navEl.classList.remove('scrolled');
-  }
-  window.addEventListener('scroll', onNavScroll, { passive:true });
-  onNavScroll();
-
-  // ---- MENÚ DE HAMBURGUESA: overlay de pantalla completa (estilo Palantir) ----
-  (function(){
-    const toggle = document.getElementById('menuToggle');
-    const closeBtn = document.getElementById('menuClose');
-    const overlay = document.getElementById('menuOverlay');
-    if (!toggle || !overlay) return;
-
-    function openMenu(){
-      overlay.classList.add('is-open');
-      document.body.classList.add('menu-locked');
-      document.documentElement.classList.add('menu-open');
-      toggle.setAttribute('aria-expanded', 'true');
-      overlay.setAttribute('aria-hidden', 'false');
-    }
-    function closeMenu(){
-      overlay.classList.remove('is-open');
-      document.body.classList.remove('menu-locked');
-      document.documentElement.classList.remove('menu-open');
-      toggle.setAttribute('aria-expanded', 'false');
-      overlay.setAttribute('aria-hidden', 'true');
-    }
-    function isOpen(){ return overlay.classList.contains('is-open'); }
-
-    toggle.addEventListener('click', () => { isOpen() ? closeMenu() : openMenu(); });
-    closeBtn.addEventListener('click', closeMenu);
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen()) closeMenu(); });
-    overlay.querySelectorAll('.menu-links a').forEach(a => a.addEventListener('click', closeMenu));
-  })();
-
-  // fases y tarjetas de la sección deploy — scroll reveal
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('in-view');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.3, rootMargin: '0px 0px -8% 0px' });
-  document.querySelectorAll('.phase-row, .model-card').forEach(el => io.observe(el));
-
-  // ---- TYPEWRITER: los titulares se "escriben" al entrar en pantalla ----
-  (function(){
-    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const CHAR_MS = 20;
-
-    // envuelve cada carácter de los nodos de texto en un span, preservando
-    // los <span class="accent">/<span class="fade"> y <br> ya existentes
-    function wrapChars(root){
-      Array.from(root.childNodes).forEach(node => {
-        if (node.nodeType === 3) {
-          const frag = document.createDocumentFragment();
-          Array.from(node.textContent).forEach(ch => {
-            const span = document.createElement('span');
-            span.className = 'tw-char';
-            span.textContent = ch;
-            frag.appendChild(span);
-          });
-          node.parentNode.replaceChild(frag, node);
-        } else if (node.nodeType === 1 && node.tagName !== 'BR') {
-          wrapChars(node);
-        }
-      });
-    }
-
-    function typeOut(chars, cursor){
-      let i = 0;
-      cursor.classList.add('tw-active');
-      const timer = setInterval(() => {
-        if (i < chars.length) {
-          chars[i].classList.add('tw-in');
-          i++;
-        } else {
-          clearInterval(timer);
-          setTimeout(() => cursor.classList.remove('tw-active'), 400);
-        }
-      }, CHAR_MS);
-    }
-
-    const targets = document.querySelectorAll('.decl-huge, .decl-quote, .sec-head h2');
-    const prepared = [];
-    targets.forEach(el => {
-      wrapChars(el);
-      const chars = Array.from(el.querySelectorAll('.tw-char'));
-      const cursor = document.createElement('span');
-      cursor.className = 'tw-cursor';
-      el.appendChild(cursor);
-      if (reduceMotion) { chars.forEach(c => c.classList.add('tw-in')); return; }
-      prepared.push({ el, chars, cursor, done:false });
-    });
-
-    if (!reduceMotion && prepared.length) {
-      const twIO = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const item = prepared.find(p => p.el === entry.target);
-            if (item && !item.done) {
-              item.done = true;
-              typeOut(item.chars, item.cursor);
-            }
-            twIO.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.35, rootMargin: '0px 0px -10% 0px' });
-      prepared.forEach(p => twIO.observe(p.el));
-
-      // red de seguridad: si algo no se llegó a escribir, mostrarlo completo
-      setTimeout(() => {
-        prepared.forEach(p => { if (!p.done) { p.done = true; p.chars.forEach(c => c.classList.add('tw-in')); } });
-      }, 8000);
-    }
-  })();
-
-  // ---- HAZ DE LÍNEAS DEL HERO: muchas fuentes que convergen y se abren hacia varios destinos ----
-  (function(){
-    const canvas = document.getElementById('heroDots');
-    const hero = document.querySelector('.hero');
-    if (!canvas || !hero) return;
-    const ctx = canvas.getContext('2d');
-    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    let dpr = Math.min(window.devicePixelRatio || 1, 2);
-    let w = 0, h = 0;
-    let strands = [];
-    let mouse = { x: -9999, y: -9999 };
-    const GLOW_R = 190;
-
-    function lerp(a, b, t){ return a + (b - a) * t; }
-
-    function bezierPoint(p0, p1, p2, p3, t){
-      const mt = 1 - t;
-      return {
-        x: mt * mt * mt * p0.x + 3 * mt * mt * t * p1.x + 3 * mt * t * t * p2.x + t * t * t * p3.x,
-        y: mt * mt * mt * p0.y + 3 * mt * mt * t * p1.y + 3 * mt * t * t * p2.y + t * t * t * p3.y,
-      };
-    }
-
-    // muchos orígenes dispersos a la izquierda, todos pasan cerca de un mismo
-    // punto de convergencia y luego se abren hacia varios destinos a la derecha
-    // — muchas fuentes de datos integrándose en una sola arquitectura
-    function makeStrands(){
-      const rows = 5;
-      const perRow = Math.max(5, Math.min(9, Math.round(w / 190)));
-      const marginY = h * 0.12;
-      const pinch = { x: w * 0.46, y: h * 0.52 };
-      const arr = [];
-      for (let r = 0; r < rows; r++){
-        const rowY = marginY + (h - marginY * 2) * (r / (rows - 1));
-        const bright = r === 1; // una fila destaca, como en la referencia
-        for (let i = 0; i < perRow; i++){
-          const p0 = { x: -40 - Math.random() * 60, y: (Math.random() - 0.15) * h * 1.15 };
-          const p3 = { x: w + 60, y: rowY + (Math.random() - 0.5) * 22 };
-          const pull = 0.5 + Math.random() * 0.16;
-          const jitter = () => (Math.random() - 0.5) * 30;
-          const p1 = { x: lerp(p0.x, pinch.x, pull) + jitter(), y: lerp(p0.y, pinch.y, pull) + jitter() };
-          const p2 = { x: lerp(p3.x, pinch.x, pull) + jitter(), y: lerp(p3.y, pinch.y, pull) + jitter() };
-          arr.push({
-            p0, p1, p2, p3,
-            alpha: bright ? 0.2 + Math.random() * 0.16 : 0.03 + Math.random() * 0.06,
-            seed: Math.random() * Math.PI * 2,
-          });
-        }
-      }
-      return arr;
-    }
-
-    function resize(){
-      const rect = hero.getBoundingClientRect();
-      w = rect.width; h = rect.height;
-      canvas.width = w * dpr; canvas.height = h * dpr;
-      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      strands = makeStrands();
-    }
-
-    function draw(t){
-      ctx.clearRect(0, 0, w, h);
-      const drift = reduceMotion ? 0 : Math.sin(t * 0.00012) * 10;
-      for (let i = 0; i < strands.length; i++){
-        const s = strands[i];
-        const wobble = reduceMotion ? 0 : Math.sin(t * 0.00022 + s.seed) * 6;
-        const p1 = { x: s.p1.x + drift, y: s.p1.y + wobble };
-        const p2 = { x: s.p2.x + drift, y: s.p2.y - wobble };
-
-        const mid = bezierPoint(s.p0, p1, p2, s.p3, 0.6);
-        const dx = mid.x - mouse.x, dy = mid.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const boost = dist < GLOW_R ? (1 - dist / GLOW_R) * 0.45 : 0;
-
-        ctx.beginPath();
-        ctx.moveTo(s.p0.x, s.p0.y);
-        ctx.bezierCurveTo(p1.x, p1.y, p2.x, p2.y, s.p3.x, s.p3.y);
-        ctx.strokeStyle = `rgba(235,238,245,${Math.min(1, s.alpha + boost).toFixed(3)})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      }
-    }
-
-    function loop(t){
-      draw(t);
-      requestAnimationFrame(loop);
-    }
-
-    resize();
-    window.addEventListener('resize', resize);
-
-    if (reduceMotion) {
-      draw(0);
-    } else {
-      hero.addEventListener('mousemove', (e) => {
-        const rect = hero.getBoundingClientRect();
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
-      });
-      hero.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
-      requestAnimationFrame(loop);
-    }
-  })();
-
-  // ---- IMAGEN QUE SE EXPANDE AL HACER SCROLL ----
-  (function(){
-    const stage = document.getElementById('fieldStage');
-    const media = document.getElementById('fieldMedia');
-    if (!stage || !media) return;
-    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) { stage.classList.add('no-motion'); return; }
-
-    const START_W = 58, START_H = 60; // vw / vh
-    const START_R = 24; // px
-
-    function update(){
-      const rect = stage.getBoundingClientRect();
-      const runway = rect.height - window.innerHeight;
-      const progress = runway > 0 ? Math.min(1, Math.max(0, -rect.top / runway)) : 1;
-      media.style.width = (START_W + (100 - START_W) * progress) + 'vw';
-      media.style.height = (START_H + (100 - START_H) * progress) + 'vh';
-      media.style.borderRadius = (START_R * (1 - progress)) + 'px';
-    }
-
-    let ticking = false;
-    function onScroll(){
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(() => { update(); ticking = false; });
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive:true });
-    window.addEventListener('resize', onScroll);
-    update();
-  })();
-</script>
-
+<script src="assets/js/site.js" defer></script>
 </body>
 </html>

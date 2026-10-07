@@ -1,0 +1,6 @@
+# El sitio anterior tenía /modelo/ y /acerca/ como páginas aparte;
+# el sitio actual cubre ese contenido dentro de index.html por ancla.
+/modelo/*   /#despliegue   301
+/modelo     /#despliegue   301
+/acerca/*   /#acerca       301
+/acerca     /#acerca       301
