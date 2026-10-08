@@ -21,13 +21,13 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100..1000&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
 
 
-<div style="background: #08090B; color: #FFFFFF; font-family: 'Inter Tight', system-ui, sans-serif; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased">
+<div style="background: #08090B; color: #FFFFFF; font-family: 'DM Sans', system-ui, sans-serif; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased">
 
 <!-- ═════════════ PORTADA ═════════════ -->
 <div class="ac" id="ac" hidden aria-label="Acerca de Pahlass">
@@ -120,7 +120,7 @@
   </div>
 </header>
 <section id="inicio" style="position: relative; min-height: 920px; display: flex; flex-direction: column; overflow: hidden">
-  <div class="reel" aria-hidden="true"><div class="sl on" data-s="Manufactura" data-v="aereo"><video muted playsinline preload="auto" poster="assets/videos/aereo.jpg" src="assets/videos/aereo.mp4"></video></div><div class="sl" data-s="Dirección" data-v="equipo"><video muted playsinline preload="metadata" poster="assets/videos/equipo.jpg" src="assets/videos/equipo.mp4"></video></div><div class="sl" data-s="Agroindustria" data-v="agro"><video muted playsinline preload="metadata" poster="assets/videos/agro.jpg" src="assets/videos/agro.mp4"></video></div><div class="sl" data-s="Análisis" data-v="analisis"><video muted playsinline preload="metadata" poster="assets/videos/analisis.jpg" src="assets/videos/analisis.mp4"></video></div><div class="sl" data-s="Construcción" data-v="construccion"><video muted playsinline preload="metadata" poster="assets/videos/construccion.jpg" src="assets/videos/construccion.mp4"></video></div><div class="sl" data-s="Comercio" data-v="moda"><video muted playsinline preload="metadata" poster="assets/videos/moda.jpg" src="assets/videos/moda.mp4"></video></div><div class="sl" data-s="Comercio" data-v="ferreteria"><video muted playsinline preload="metadata" poster="assets/videos/ferreteria.jpg" src="assets/videos/ferreteria.mp4"></video></div><div class="sl" data-s="Administración" data-v="oficina"><video muted playsinline preload="metadata" poster="assets/videos/oficina.jpg" src="assets/videos/oficina.mp4"></video></div><div class="sl" data-s="Salud" data-v="salud"><video muted playsinline preload="metadata" poster="assets/videos/salud.jpg" src="assets/videos/salud.mp4"></video></div><div class="sl" data-s="Servicios" data-v="casa"><video muted playsinline preload="metadata" poster="assets/videos/casa.jpg" src="assets/videos/casa.mp4"></video></div></div>
+  <div class="reel" aria-hidden="true"><div class="sl on"><video id="intro" muted autoplay playsinline loop preload="auto" poster="assets/videos/pahlass-intro.jpg" src="assets/videos/pahlass-intro.mp4"></video></div></div>
   <div class="tinte t-color" aria-hidden="true"></div>
   <div class="tinte t-brillo" aria-hidden="true"></div>
   <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(3,4,6,.94) 0%, rgba(3,4,6,.74) 38%, rgba(3,4,6,.42) 70%, rgba(3,4,6,.3) 100%)"></div>
@@ -133,7 +133,7 @@
   <div style="position: relative; z-index: 2; flex: 1; display: flex; align-items: center">
     <div style="max-width: 1840px; width: 100%; margin: 0 auto; padding: 140px 50px 120px; box-sizing: border-box">
       <div style="max-width: 960px; display: flex; flex-direction: column; gap: 36px">
-        <h1 style="margin: 0; font-size: 84px; line-height: 1.02; font-weight: 300; letter-spacing: -0.04em; max-width: 12em">Desarrollamos el modelo de datos detrás de cada decisión.</h1>
+        <h1 style="margin: 0; font-size: 84px; line-height: 1.02; font-weight: 300; letter-spacing: -0.02em; max-width: 12em">Desarrollamos el modelo de datos detrás de cada decisión.</h1>
         <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px">
           <a class="bp" href="#contacto" style="background: #FFFFFF; color: #08090B; font-size: 15px; font-weight: 500; padding: 18px 28px; min-height: 56px; box-sizing: border-box; display: inline-flex; align-items: center; gap: 14px">Hablar con nuestro equipo <span style="font-family: 'JetBrains Mono', monospace">→</span></a>
           <a class="bs" href="#plataforma" style="border: 1px solid rgba(255,255,255,.4); font-size: 15px; padding: 18px 28px; min-height: 56px; box-sizing: border-box; display: inline-flex; align-items: center">Conocer la plataforma</a>
@@ -145,13 +145,10 @@
   </section>
 
 <!-- ═════════════ DECLARACIÓN ═════════════ -->
-<section id="plataforma" style="background: #EEF0F2; color: #0B0C0E">
-  <div style="max-width: 1360px; margin: 0 auto; padding: 160px 40px; display: flex; flex-wrap: wrap; gap: 64px">
-    <span style="flex: 0 0 200px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.18em; color: #5C626B; padding-top: 14px">QUÉ HACEMOS</span>
-    <div style="flex: 1 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 48px">
-      <p style="margin: 0; font-size: 44px; line-height: 1.18; font-weight: 300; letter-spacing: -0.03em">Del origen a la decisión. <span style="color: #6B717A">Capturamos tus fuentes, estructuramos tu arquitectura de datos y entregamos el software para explorarla. Todo en un solo sistema, bajo tu control.</span></p>
-      <div class="tres" id="tres"><div class="t-col"><p>Nos enfocamos en crear la mejor experiencia para trabajar con datos, con una plataforma que se adapta a tu modelo de negocio y a tu industria.</p></div><div class="t-col"><p>Construimos la arquitectura de datos completa, de extremo a extremo: desde la captura en el origen hasta el análisis.</p></div><div class="t-col"><p>Así puedes formular y responder preguntas complejas sobre tu negocio, sin dominar lenguajes de consulta, modelos estadísticos ni líneas de comando.</p></div></div>
-    </div>
+<section id="plataforma" class="st" aria-label="Qué hacemos">
+  <div class="st-in">
+    <p class="st-frase" id="stFrase">Nuestro software conecta y ordena tus datos <span class="st-gris">de extremo a extremo y en tiempo real</span>, desde el primer registro hasta la última decisión.</p>
+    <p class="st-sub" id="stSub">Ofrecemos la infraestructura necesaria para que cualquier organización tome decisiones con máxima precisión.</p>
   </div>
 </section>
 
@@ -209,7 +206,7 @@
   <div style="max-width: 1360px; margin: 0 auto; padding: 160px 40px; display: flex; flex-wrap: wrap; gap: 64px">
     <span style="flex: 0 0 200px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.18em; color: #5C626B; padding-top: 16px">COMPAÑÍA</span>
     <div style="flex: 1 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 40px">
-      <p style="margin: 0; font-size: 52px; line-height: 1.1; font-weight: 300; letter-spacing: -0.035em">Pahlass es una plataforma de datos de extremo a extremo. Captura, arquitectura y aplicación en un solo sistema. El software se adapta a tu negocio y el modelo de datos crece conforme crece tu industria, para que cualquiera en tu equipo pueda responder preguntas complejas sin tocar una línea de código.</p>
+      <p style="margin: 0; font-size: 52px; line-height: 1.1; font-weight: 300; letter-spacing: -0.02em">Pahlass es una plataforma de datos de extremo a extremo. Captura, arquitectura y aplicación en un solo sistema. El software se adapta a tu negocio y el modelo de datos crece conforme crece tu industria, para que cualquiera en tu equipo pueda responder preguntas complejas sin tocar una línea de código.</p>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 0; border-top: 1px solid #C9CDD3">
         <div style="padding: 24px 24px 0 0"><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #5C626B">SEDE</span><p style="margin: 8px 0 0; font-size: 17px">Culiacán, Sinaloa</p></div>
         <div style="padding: 24px 24px 0 0"><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #5C626B">ESPECIALIDAD</span><p style="margin: 8px 0 0; font-size: 17px">Software a la medida e ingeniería de datos</p></div>
@@ -225,7 +222,7 @@
   <div style="max-width: 1360px; margin: 0 auto; padding: 160px 40px; display: flex; flex-wrap: wrap; gap: 80px; align-items: flex-start">
     <div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
       <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.18em; color: #7A808A">CONTACTO</span>
-      <h2 style="margin: 0; font-size: 88px; line-height: 0.98; font-weight: 300; letter-spacing: -0.045em">Hablemos de tu operación.</h2>
+      <h2 style="margin: 0; font-size: 88px; line-height: 0.98; font-weight: 300; letter-spacing: -0.02em">Hablemos de tu operación.</h2>
       <p style="margin: 0; font-size: 19px; font-weight: 300; color: #A3A9B2; max-width: 28em">Una sesión de 45 minutos. Nos cuentas cómo trabaja tu organización y te mostramos cómo se vería en Pahlass.</p>
       <p style="margin: 8px 0 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #7A808A">[CORREO DE CONTACTO]</p>
     </div>
@@ -234,17 +231,17 @@
         <form id="frm" style="padding: 40px; display: flex; flex-direction: column; gap: 22px">
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 22px">
             <label style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #A3A9B2">Nombre
-              <input name="nombre" required="required" autocomplete="name" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'Inter Tight', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
+              <input name="nombre" required="required" autocomplete="name" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'DM Sans', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
             </label>
             <label style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #A3A9B2">Organización
-              <input name="organizacion" required="required" autocomplete="organization" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'Inter Tight', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
+              <input name="organizacion" required="required" autocomplete="organization" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'DM Sans', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
             </label>
           </div>
           <label style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #A3A9B2">Correo
-            <input name="correo" type="email" required="required" autocomplete="email" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'Inter Tight', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
+            <input name="correo" type="email" required="required" autocomplete="email" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'DM Sans', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
           </label>
           <label style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #A3A9B2">Industria
-            <select name="industria" style="background: #0E1013; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'Inter Tight', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
+            <select name="industria" style="background: #0E1013; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'DM Sans', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
               <option>Educación</option>
               <option>Salud</option>
               <option>Comercio</option>
@@ -252,9 +249,9 @@
             </select>
           </label>
           <label style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #A3A9B2">¿Qué te gustaría resolver?
-            <textarea name="mensaje" rows="3" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'Inter Tight', sans-serif; font-size: 17px; padding: 10px 0; resize: vertical"></textarea>
+            <textarea name="mensaje" rows="3" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'DM Sans', sans-serif; font-size: 17px; padding: 10px 0; resize: vertical"></textarea>
           </label>
-          <button class="bp" type="submit" style="background: #FFFFFF; color: #08090B; border: 0; font-family: 'Inter Tight', sans-serif; font-size: 15px; font-weight: 500; padding: 18px 26px; min-height: 58px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-top: 10px">Solicitar una sesión <span style="font-family: 'JetBrains Mono', monospace">→</span></button>
+          <button class="bp" type="submit" style="background: #FFFFFF; color: #08090B; border: 0; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; padding: 18px 26px; min-height: 58px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-top: 10px">Solicitar una sesión <span style="font-family: 'JetBrains Mono', monospace">→</span></button>
           <p id="fErr" hidden style="margin:0;font-size:13px;color:#A3A9B2">No se pudo enviar. Intenta de nuevo o escríbenos a acceso@pahlass.com.</p>
         </form>
       </div>
@@ -263,7 +260,7 @@
           <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #7BC096; display: flex; align-items: center; gap: 10px"><span style="width: 8px; height: 8px; background: #5E9E72; display: block"></span>SOLICITUD RECIBIDA</span>
           <span style="font-size: 36px; font-weight: 300; letter-spacing: -0.02em">Gracias, <span id="oNom"></span>.</span>
           <span style="font-size: 17px; color: #A3A9B2">Te escribiremos en menos de un día hábil para agendar la sesión con <span id="oOrg"></span>.</span>
-          <button class="bs" type="button" id="otra" style="align-self: flex-start; background: none; border: 1px solid #3B4048; color: #FFFFFF; font-family: 'Inter Tight', sans-serif; font-size: 14px; padding: 13px 20px; min-height: 46px; cursor: pointer; margin-top: 10px">Enviar otra solicitud</button>
+          <button class="bs" type="button" id="otra" style="align-self: flex-start; background: none; border: 1px solid #3B4048; color: #FFFFFF; font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 13px 20px; min-height: 46px; cursor: pointer; margin-top: 10px">Enviar otra solicitud</button>
         </div>
       </div>
     </div>

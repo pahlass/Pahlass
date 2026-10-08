@@ -20,31 +20,15 @@ document.getElementById('otra').addEventListener('click',()=>{document.getElemen
   document.getElementById('fOk').hidden=true;document.getElementById('fForm').hidden=false;});
 
 
-/* portada: escenas en video */
+/* portada: video de introducción completo, en bucle */
 (function(){
-  const S=[...document.querySelectorAll('.reel .sl')], B=[...document.querySelectorAll('.pg button')];
-  const V=S.map(s=>s.querySelector('video')), n=S.length;
+  const v=document.getElementById('intro'); if(!v) return;
   const quieto=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(typeof VID!=='undefined') V.forEach((v,k)=>{const b=atob(VID[S[k].dataset.v]);const u=new Uint8Array(b.length);
-    for(let j=0;j<b.length;j++)u[j]=b.charCodeAt(j);v.src=URL.createObjectURL(new Blob([u],{type:'video/mp4'}));});
-  let i=0,t=null;
-  function ir(k){
-    const prev=V[i]; S[i].classList.remove('on'); i=(k+n)%n; S[i].classList.add('on');if(window.hud)hud(i);
-    const v=V[i]; v.currentTime=0;
-    const sig=V[(i+1)%n]; if(sig.preload!=='auto'){sig.preload='auto'; if(!sig.src&&sig.dataset.src)sig.src=sig.dataset.src;}
-    const dur=(v.duration&&isFinite(v.duration)?v.duration:7)-0.4;
-    if(!quieto){const pr=v.play();if(pr&&pr.catch)pr.catch(()=>{});}
-    setTimeout(()=>{if(prev!==v)prev.pause();},1900);
-    B.forEach((b,j)=>{b.classList.toggle('on',j===i);b.classList.toggle('hecho',j<i);b.style.setProperty('--dur',dur+'s');
-      const x=b.querySelector('i');x.style.animation='none';x.offsetWidth;x.style.animation='';});
-    clearTimeout(t); if(!quieto) t=setTimeout(()=>ir(i+1),dur*1000);
-  }
-  B.forEach((b,j)=>b.addEventListener('click',()=>ir(j)));
-  document.addEventListener('visibilitychange',()=>{if(document.hidden){clearTimeout(t);V[i].pause();}
-    else if(!quieto){V[i].play().catch(()=>{});t=setTimeout(()=>ir(i+1),5000);}});
-  const arranca=()=>ir(0);
-  if(V[0].readyState>=1) arranca(); else V[0].addEventListener('loadedmetadata',arranca,{once:true});
-  setTimeout(()=>{if(!t&&!quieto)arranca();},1500);
+  const reproducir=()=>{ if(quieto) return; const p=v.play(); if(p&&p.catch) p.catch(()=>{}); };
+  if(window.hud) hud(0);
+  v.addEventListener('canplay',reproducir); reproducir();
+  document.addEventListener('visibilitychange',()=>{ if(document.hidden) v.pause(); else reproducir(); });
+  new IntersectionObserver(es=>{ es[0].isIntersecting?reproducir():v.pause(); },{threshold:0}).observe(v);
 })();
 
 /* ═══ tinte de color por escena ═══ */
@@ -84,18 +68,45 @@ document.getElementById('otra').addEventListener('click',()=>{document.getElemen
   ir(0);
 })();
 
-/* ═══ qué hacemos: tres columnas que se ordenan ═══ */
+/* ═══ declaración: las líneas entran de lado y la frase clave se escribe ═══ */
 (function(){
-  const t=document.getElementById('tres'); if(!t) return;
-  const cols=[...t.querySelectorAll('.t-col')];
-  cols.forEach((c,ci)=>{
-    const base=ci*0.55;
-    c.style.setProperty('--d0',base+'s'); c.style.setProperty('--d1',(base+0.25)+'s');
-    const p=c.querySelector('p'), pal=p.textContent.split(' ');
-    p.innerHTML=pal.map((w,k)=>'<span class="w" style="transition-delay:'+(base+0.45+k*0.035).toFixed(3)+'s">'+w+'</span>').join(' ');
+  const fr=document.getElementById('stFrase'), sub=document.getElementById('stSub'); if(!fr) return;
+  const quieto=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // 1) palabras normales y letras de la frase gris, cada una en su span (el espacio de la gris queda reservado)
+  const partes=[];
+  fr.childNodes.forEach(n=>{
+    if(n.nodeType===3) n.textContent.split(/(\s+)/).forEach(t=>{ if(!t) return; partes.push(/^\s+$/.test(t)?' ':`<span class="st-p"${/^[,.;:]/.test(t)?' data-pegado':''}>${t}</span>`); });
+    else n.textContent.split(/(\s+)/).forEach(t=>{ if(!t) return; partes.push(/^\s+$/.test(t)?' ':`<span class="st-p st-g">${[...t].map(c=>`<span class="st-c">${c}</span>`).join('')}</span>`); });
   });
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches){t.classList.add('vis');return;}
-  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){t.classList.add('vis');o.disconnect();}},{threshold:.3}).observe(t);
+  fr.innerHTML=partes.join('');
+  const letras=[...fr.querySelectorAll('.st-c')];
+  // 2) agrupa por línea visual
+  let lineas=[];
+  function armar(){
+    const ps=[...fr.querySelectorAll('.st-p')]; fr.innerHTML=''; ps.forEach((p,i)=>{ if(i>0&&!p.hasAttribute('data-pegado')) fr.appendChild(document.createTextNode(' ')); fr.appendChild(p); });
+    const grupos=[]; let y=null;
+    ps.forEach(p=>{ const t=p.offsetTop; if(!p.hasAttribute('data-pegado')&&(y===null||Math.abs(t-y)>4)){grupos.push([]);y=t;} grupos[grupos.length-1].push(p); });
+    fr.innerHTML=''; lineas=grupos.map(g=>{ const l=document.createElement('span'); l.className='st-ln'; g.forEach((p,i)=>{ if(i>0&&!p.hasAttribute('data-pegado')) l.appendChild(document.createTextNode(' ')); l.appendChild(p); }); fr.appendChild(l); return l; });
+  }
+  armar();
+  if(quieto){ letras.forEach(c=>c.classList.add('v')); sub.classList.add('v'); return; }
+  // estado inicial: líneas corridas a los lados y en gris claro
+  function inicial(){ lineas.forEach((l,i)=>{ l.style.transition='none'; l.style.transform=`translateX(${i%2?56:-56}px)`; l.querySelectorAll('.st-p:not(.st-g)').forEach(p=>p.style.color='#C9CDD3'); }); }
+  inicial();
+  let hecho=false;
+  function animar(){
+    if(hecho) return; hecho=true;
+    lineas.forEach((l,i)=>{ setTimeout(()=>{ l.style.transition='transform 1.15s cubic-bezier(.2,.8,.2,1)'; l.style.transform='none';
+      l.querySelectorAll('.st-p:not(.st-g)').forEach(p=>p.style.color=''); },120*i); });
+    // la frase clave se escribe cuando las líneas ya llegaron
+    const t0=120*lineas.length+650;
+    letras.forEach((c,i)=>setTimeout(()=>c.classList.add('v'),t0+i*32));
+    setTimeout(()=>sub.classList.add('v'),t0+letras.length*32+250);
+  }
+  new IntersectionObserver((es,o)=>{ if(es[0].isIntersecting){ animar(); o.disconnect(); } },{threshold:.45}).observe(fr);
+  let tm; addEventListener('resize',()=>{ clearTimeout(tm); tm=setTimeout(()=>{ armar(); if(!hecho) inicial(); },150); });
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{ armar(); if(!hecho) inicial(); });
+  if(document.fonts) document.fonts.addEventListener('loadingdone',()=>{ armar(); if(!hecho) inicial(); });
 })();
 
 /* ═══ cabecera fija: menú y búsqueda ═══ */
