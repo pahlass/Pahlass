@@ -150,6 +150,8 @@ button:focus-visible,a:focus-visible{outline:1px solid #2B4FD8;outline-offset:3p
 
 /* portada: cada palabra del título rueda dentro de su máscara, escalonada */
 .rolla{--rw:1.12em;line-height:var(--rw)!important;text-wrap:balance}
+.rolla .rl{display:block}
+@media (max-width:760px){#heroTitulo{font-size:34px!important}}
 .rolla .rw{display:inline-block;height:var(--rw);overflow:hidden;vertical-align:top}
 .rolla .rw-in{display:block;transform:translateY(var(--rw));transition:transform 1.25s cubic-bezier(.7,0,.2,1) calc(var(--i)*80ms)}
 .rolla .rw-in>span{display:block;height:var(--rw);white-space:nowrap}
