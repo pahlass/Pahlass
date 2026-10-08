@@ -31,6 +31,26 @@ document.getElementById('otra').addEventListener('click',()=>{document.getElemen
   new IntersectionObserver(es=>{ es[0].isIntersecting?reproducir():v.pause(); },{threshold:0}).observe(v);
 })();
 
+/* portada: el título entra palabra por palabra, rodando como un contador */
+(function(){
+  const h=document.getElementById('heroTitulo'); if(!h) return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const txt=h.textContent.trim();
+  h.setAttribute('aria-label',txt); h.textContent='';
+  txt.split(/\s+/).forEach((w,i)=>{
+    if(i) h.appendChild(document.createTextNode(' '));
+    const rw=document.createElement('span'); rw.className='rw'; rw.setAttribute('aria-hidden','true');
+    const inn=document.createElement('span'); inn.className='rw-in'; inn.style.setProperty('--i',i);
+    for(let k=0;k<3;k++){ const c=document.createElement('span'); c.textContent=w; inn.appendChild(c); }
+    rw.appendChild(inn); h.appendChild(rw);
+  });
+  h.classList.add('arma');
+  const entra=()=>{ h.classList.add('reset'); h.classList.remove('in','out'); void h.offsetWidth; h.classList.remove('reset'); h.classList.add('in'); };
+  const sale=()=>{ if(h.classList.contains('in')){ h.classList.remove('in'); h.classList.add('out'); } };
+  let visto=false;
+  new IntersectionObserver(es=>{ if(es[0].isIntersecting){ if(!visto||h.classList.contains('out')){ visto=true; entra(); } } else sale(); },{threshold:.2}).observe(h);
+})();
+
 /* ═══ tinte de color por escena ═══ */
 (function(){
   const TONO=["#4C8DFF", "#FFB547", "#A3E635", "#34D399", "#FB923C", "#E879F9", "#FF6B6B", "#A78BFA", "#38BDF8", "#22D3EE"];
