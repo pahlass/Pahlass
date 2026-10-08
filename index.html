@@ -21,13 +21,13 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100..1000&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
 
 
-<div style="background: #08090B; color: #FFFFFF; font-family: 'DM Sans', system-ui, sans-serif; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased">
+<div style="background: #08090B; color: #FFFFFF; font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased">
 
 <!-- ═════════════ PORTADA ═════════════ -->
 <div class="ac" id="ac" hidden aria-label="Acerca de Pahlass">
@@ -157,9 +157,17 @@
   <div class="pr-in">
     <div class="pr-cab"><div><small>PRODUCTOS</small><h2>Dos productos. Un mismo núcleo.</h2></div>
       <p>Empieza por ordenar tu operación con Coppermind. Cuando estés listo para decidir con datos, activa Diagram, sin migrar nada.</p></div>
-    <div class="pr-grid">
-      <a class="pr-t pr-cu" href="#producto/coppermind"><img class="pr-img" src="assets/img/coppermind.jpg" alt="" loading="lazy" decoding="async"><div class="pr-tx"><span class="pr-k">PAHLASS</span><b>Coppermind</b><em>La memoria de tu organización.</em><p>Registra, ordena y conecta la información de toda tu operación, para que nada se pierda y todo se pueda encontrar.</p><span class="pr-l">Conoce Coppermind <i>→</i></span></div></a>
-      <a class="pr-t pr-di" href="#producto/diagram"><img class="pr-img" src="assets/img/diagram.jpg" alt="" loading="lazy" decoding="async"><div class="pr-tx"><span class="pr-k">PAHLASS</span><b>Diagram</b><em>El plan para decidir.</em><p>Coppermind recuerda todo. Diagram te dice qué hacer con eso.</p><span class="pr-l">Conoce Diagram <i>→</i></span></div></a>
+    <div class="pr-list">
+      <a class="pr-row" href="#producto/coppermind">
+        <div class="pr-row-top"><b>Coppermind</b><span class="pr-idx">/0.1</span></div>
+        <p>La memoria de tu organización. Registra, ordena y conecta la información de toda tu operación, para que nada se pierda y todo se pueda encontrar.</p>
+        <span class="pr-l">Conoce Coppermind <i>→</i></span>
+      </a>
+      <a class="pr-row" href="#producto/diagram">
+        <div class="pr-row-top"><b>Diagram</b><span class="pr-idx">/0.2</span></div>
+        <p>El plan para decidir. Coppermind recuerda todo. Diagram te dice qué hacer con eso.</p>
+        <span class="pr-l">Conoce Diagram <i>→</i></span>
+      </a>
     </div>
   </div>
 </section>
@@ -231,17 +239,17 @@
         <form id="frm" style="padding: 40px; display: flex; flex-direction: column; gap: 22px">
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 22px">
             <label style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #A3A9B2">Nombre
-              <input name="nombre" required="required" autocomplete="name" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'DM Sans', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
+              <input name="nombre" required="required" autocomplete="name" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
             </label>
             <label style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #A3A9B2">Organización
-              <input name="organizacion" required="required" autocomplete="organization" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'DM Sans', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
+              <input name="organizacion" required="required" autocomplete="organization" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
             </label>
           </div>
           <label style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #A3A9B2">Correo
-            <input name="correo" type="email" required="required" autocomplete="email" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'DM Sans', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
+            <input name="correo" type="email" required="required" autocomplete="email" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
           </label>
           <label style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #A3A9B2">Industria
-            <select name="industria" style="background: #0E1013; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'DM Sans', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
+            <select name="industria" style="background: #0E1013; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif; font-size: 17px; padding: 10px 0; min-height: 46px; box-sizing: border-box">
               <option>Educación</option>
               <option>Salud</option>
               <option>Comercio</option>
@@ -249,9 +257,9 @@
             </select>
           </label>
           <label style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #A3A9B2">¿Qué te gustaría resolver?
-            <textarea name="mensaje" rows="3" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'DM Sans', sans-serif; font-size: 17px; padding: 10px 0; resize: vertical"></textarea>
+            <textarea name="mensaje" rows="3" style="background: transparent; border: 0; border-bottom: 1px solid #3B4048; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif; font-size: 17px; padding: 10px 0; resize: vertical"></textarea>
           </label>
-          <button class="bp" type="submit" style="background: #FFFFFF; color: #08090B; border: 0; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; padding: 18px 26px; min-height: 58px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-top: 10px">Solicitar una sesión <span style="font-family: 'JetBrains Mono', monospace">→</span></button>
+          <button class="bp" type="submit" style="background: #FFFFFF; color: #08090B; border: 0; font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 500; padding: 18px 26px; min-height: 58px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-top: 10px">Solicitar una sesión <span style="font-family: 'JetBrains Mono', monospace">→</span></button>
           <p id="fErr" hidden style="margin:0;font-size:13px;color:#A3A9B2">No se pudo enviar. Intenta de nuevo o escríbenos a acceso@pahlass.com.</p>
         </form>
       </div>
@@ -260,7 +268,7 @@
           <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #7BC096; display: flex; align-items: center; gap: 10px"><span style="width: 8px; height: 8px; background: #5E9E72; display: block"></span>SOLICITUD RECIBIDA</span>
           <span style="font-size: 36px; font-weight: 300; letter-spacing: -0.02em">Gracias, <span id="oNom"></span>.</span>
           <span style="font-size: 17px; color: #A3A9B2">Te escribiremos en menos de un día hábil para agendar la sesión con <span id="oOrg"></span>.</span>
-          <button class="bs" type="button" id="otra" style="align-self: flex-start; background: none; border: 1px solid #3B4048; color: #FFFFFF; font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 13px 20px; min-height: 46px; cursor: pointer; margin-top: 10px">Enviar otra solicitud</button>
+          <button class="bs" type="button" id="otra" style="align-self: flex-start; background: none; border: 1px solid #3B4048; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif; font-size: 14px; padding: 13px 20px; min-height: 46px; cursor: pointer; margin-top: 10px">Enviar otra solicitud</button>
         </div>
       </div>
     </div>
