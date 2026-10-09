@@ -258,7 +258,7 @@ document.getElementById('otra').addEventListener('click',()=>{document.getElemen
     requestAnimationFrame(()=>{cs.classList.add('abierto');tono();});
     document.title=((ART[slug]&&ART[slug].titular)||CASOS[i].n)+' · Pahlass'; }
   function cierra(){ if(cs.hidden) return; cs.classList.remove('abierto'); document.documentElement.classList.remove('en-caso');
-    setTimeout(()=>{if(!cs.classList.contains('abierto')){cs.hidden=true;cs.innerHTML='';}},450); document.title='Pahlass | Sistemas de dominio de datos';
+    setTimeout(()=>{if(!cs.classList.contains('abierto')){cs.hidden=true;cs.innerHTML='';}},450); document.title='Pahlass | Sistema de orquestación de datos multidominio';
     window.dispatchEvent(new Event('scroll')); }
   function ruta(){ const m=location.hash.match(/^#caso\/([a-z-]+)/); if(m) abre(m[1]); else cierra(); }
   addEventListener('hashchange',ruta);
@@ -297,7 +297,7 @@ document.getElementById('otra').addEventListener('click',()=>{document.getElemen
   function abre(f){ render(f); sp.hidden=false; document.documentElement.classList.add('en-prensa'); if(cb) cb.classList.add('claro');
     requestAnimationFrame(()=>sp.classList.add('abierto')); document.title='Sala de prensa · Pahlass'; }
   function cierra(){ if(sp.hidden) return; sp.classList.remove('abierto'); document.documentElement.classList.remove('en-prensa');
-    setTimeout(()=>{if(!sp.classList.contains('abierto'))sp.hidden=true;},400); if(!location.hash.startsWith('#caso/')){document.title='Pahlass | Sistemas de dominio de datos';window.dispatchEvent(new Event('scroll'));} }
+    setTimeout(()=>{if(!sp.classList.contains('abierto'))sp.hidden=true;},400); if(!location.hash.startsWith('#caso/')){document.title='Pahlass | Sistema de orquestación de datos multidominio';window.dispatchEvent(new Event('scroll'));} }
   function ruta(){ const m=location.hash.match(/^#prensa(?:\/([a-z]+))?$/); if(m) abre(TIPOS.some(t=>t[0]===m[1])?m[1]:'todo'); else cierra(); }
   addEventListener('hashchange',ruta);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!sp.hidden&&document.getElementById('cbPanel').hidden) location.hash='industrias-esc';});
@@ -335,7 +335,7 @@ document.getElementById('otra').addEventListener('click',()=>{document.getElemen
   function abre(){ imagenes(); ac.hidden=false; ac.scrollTop=0; document.documentElement.classList.add('en-acerca');
     requestAnimationFrame(()=>{ac.classList.add('abierto');tono();lectura();}); document.title='Acerca de · Pahlass'; }
   function cierra(){ if(ac.hidden) return; ac.classList.remove('abierto'); document.documentElement.classList.remove('en-acerca');
-    setTimeout(()=>{if(!ac.classList.contains('abierto'))ac.hidden=true;},450); if(!/^#(caso|prensa)/.test(location.hash)){document.title='Pahlass | Sistemas de dominio de datos';window.dispatchEvent(new Event('scroll'));} }
+    setTimeout(()=>{if(!ac.classList.contains('abierto'))ac.hidden=true;},450); if(!/^#(caso|prensa)/.test(location.hash)){document.title='Pahlass | Sistema de orquestación de datos multidominio';window.dispatchEvent(new Event('scroll'));} }
   function ruta(){ if(location.hash==='#acerca') abre(); else cierra(); }
   addEventListener('hashchange',ruta);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!ac.hidden&&document.getElementById('cbPanel').hidden) location.hash='compania';});
@@ -390,7 +390,7 @@ document.getElementById('otra').addEventListener('click',()=>{document.getElemen
     requestAnimationFrame(()=>{pd.classList.add('abierto');tono();}); document.title=P[k].n+' · Pahlass'; }
   function cierra(){ if(pd.hidden) return; pd.classList.remove('abierto'); document.documentElement.classList.remove('en-producto');
     setTimeout(()=>{if(!pd.classList.contains('abierto'))pd.hidden=true;},450);
-    if(!/^#(caso|prensa|acerca)/.test(location.hash)){document.title='Pahlass | Sistemas de dominio de datos';window.dispatchEvent(new Event('scroll'));} }
+    if(!/^#(caso|prensa|acerca)/.test(location.hash)){document.title='Pahlass | Sistema de orquestación de datos multidominio';window.dispatchEvent(new Event('scroll'));} }
   function ruta(){ const m=location.hash.match(/^#producto\/([a-z]+)$/); if(m&&P[m[1]]) abre(m[1]); else cierra(); }
   addEventListener('hashchange',ruta);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!pd.hidden&&document.getElementById('cbPanel').hidden) location.hash='productos';});

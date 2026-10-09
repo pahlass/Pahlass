@@ -36,7 +36,7 @@ paginas = [
     ('acerca/', 'Acerca de · Pahlass',
      'Por qué existe Pahlass: construimos el modelo operativo detrás de cada decisión, con ingenieros que trabajan de forma permanente junto a cada organización.', 'website'),
     ('prensa/', 'Sala de prensa · Pahlass',
-     'Casos, artículos, comunicados e investigación de Pahlass sobre sistemas de dominio de datos en cada industria.', 'website'),
+     'Casos, artículos, comunicados e investigación de Pahlass sobre orquestación de datos multidominio en cada industria.', 'website'),
     ('coppermind/', 'Coppermind · Pahlass', producto('coppermind'), 'website'),
     ('diagram/', 'Diagram · Pahlass', producto('diagram'), 'website'),
 ] + [('casos/%s/' % slug, a['titular'] + ' · Pahlass', a['dek'], 'article') for slug, a in art.items()]
