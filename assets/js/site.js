@@ -132,7 +132,7 @@ document.getElementById('otra').addEventListener('click',()=>{document.getElemen
     fr.innerHTML=''; lineas=grupos.map(g=>{ const l=document.createElement('span'); l.className='st-ln'; g.forEach((p,i)=>{ if(i>0&&!p.hasAttribute('data-pegado')) l.appendChild(document.createTextNode(' ')); l.appendChild(p); }); fr.appendChild(l); return l; });
   }
   armar();
-  if(quieto){ letras.forEach(c=>c.classList.add('v')); sub.classList.add('v'); return; }
+  if(quieto){ letras.forEach(c=>c.classList.add('v')); sub&&sub.classList.add('v'); return; }
   // estado inicial: líneas corridas a los lados y en gris claro
   function inicial(){ lineas.forEach((l,i)=>{ l.style.transition='none'; l.style.transform=`translateX(${i%2?56:-56}px)`; l.querySelectorAll('.st-p:not(.st-g)').forEach(p=>p.style.color='#C9CDD3'); }); }
   inicial();
@@ -144,7 +144,7 @@ document.getElementById('otra').addEventListener('click',()=>{document.getElemen
     // la frase clave se escribe cuando las líneas ya llegaron
     const t0=120*lineas.length+650;
     letras.forEach((c,i)=>setTimeout(()=>c.classList.add('v'),t0+i*32));
-    setTimeout(()=>sub.classList.add('v'),t0+letras.length*32+250);
+    if(sub) setTimeout(()=>sub.classList.add('v'),t0+letras.length*32+250);
   }
   new IntersectionObserver((es,o)=>{ if(es[0].isIntersecting){ animar(); o.disconnect(); } },{threshold:.45}).observe(fr);
   let tm; addEventListener('resize',()=>{ clearTimeout(tm); tm=setTimeout(()=>{ armar(); if(!hecho) inicial(); },150); });
