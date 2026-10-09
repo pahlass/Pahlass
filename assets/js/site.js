@@ -338,7 +338,7 @@ document.getElementById('otra').addEventListener('click',()=>{document.getElemen
     setTimeout(()=>{if(!ac.classList.contains('abierto'))ac.hidden=true;},450); if(!/^#(caso|prensa)/.test(location.hash)){document.title='Pahlass | Sistema de orquestación de datos multidominio';window.dispatchEvent(new Event('scroll'));} }
   function ruta(){ if(location.hash==='#acerca') abre(); else cierra(); }
   addEventListener('hashchange',ruta);
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!ac.hidden&&document.getElementById('cbPanel').hidden) location.hash='compania';});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!ac.hidden&&document.getElementById('cbPanel').hidden) location.hash='despliegue';});
   ruta();
 })();
 /* ═══ productos: página de producto ═══ */

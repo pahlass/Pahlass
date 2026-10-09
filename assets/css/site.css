@@ -282,6 +282,14 @@ html.en-producto,html.en-producto body{overflow:hidden}
 .ac2-fund{max-width:1200px;margin:56px 0 0 auto;padding-top:34px;border-top:1px solid #16181D;font:300 26px/1.45 'Space Grotesk',sans-serif;letter-spacing:-.02em;color:#3E434A}
 .ac2-fund b{font-weight:400;color:#16181D}
 .ac2-cap{border-bottom:1px solid #DCDDE0}
+.ac2-ficha{background:#08090B;color:#FFFFFF;padding:150px 0 140px}
+.ac2-fdec{margin:0;max-width:22em;font:300 clamp(30px,3.4vw,56px)/1.12 'Space Grotesk',sans-serif;letter-spacing:-.02em}
+.ac2-fdat{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));margin:72px 0 0;border-top:1px solid #2A2E35}
+.ac2-fdat div{padding:24px 24px 0 0}
+.ac2-fdat dt{font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7A808A}
+.ac2-fdat dd{margin:10px 0 0;font:300 18px/1.4 'Space Grotesk',sans-serif}
+.ac2-fdat a{color:#FFFFFF;border-bottom:1px solid rgba(255,255,255,.5)}
+@media (max-width:1100px){.ac2-ficha{padding:90px 0}.ac2-fdat{margin-top:48px}}
 .ac2-capg{display:grid;grid-template-columns:minmax(260px,1fr) 2fr;gap:60px;padding-top:130px;padding-bottom:130px}
 .ac2-num{position:sticky;top:120px;align-self:start;display:flex;flex-direction:column;gap:18px}
 .ac2-n{font:200 clamp(120px,14vw,260px)/.8 'Space Grotesk',sans-serif;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:1.2px #16181D}
