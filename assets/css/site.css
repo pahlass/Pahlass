@@ -1074,3 +1074,17 @@ html{scroll-padding-top:90px}
   .h-ind{bottom:calc(84px + env(safe-area-inset-bottom));left:20px;right:20px}
   .pp{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
 }
+
+/* móvil y tableta: en las portadas de producto la imagen va arriba y el texto debajo, sobre color liso */
+@media (max-width:1000px){
+  .pd-hero{min-height:0;flex-direction:column;align-items:stretch}
+  .pd-hero img.pd-img{position:relative;inset:auto;display:block;width:100%!important;height:min(48svh,440px);object-position:70% 40%;
+    -webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+  .pd-hero .pd-in{padding-top:8px;padding-bottom:64px}
+  .pd-hero h1{margin-top:14px;font-size:clamp(56px,16vw,96px)!important}
+  .pd-tag{font-size:24px}
+  .pd-sub{font-size:17px}
+}
+@media (max-width:760px){
+  .pd,.ac,.sp,.cs{padding-bottom:calc(80px + env(safe-area-inset-bottom))}
+}
