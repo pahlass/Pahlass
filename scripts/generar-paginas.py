@@ -24,7 +24,15 @@ RAIZ = Path(__file__).resolve().parent.parent
 DOMINIO = 'https://pahlass.com'
 AVISO = '<!-- Generado por scripts/generar-paginas.py a partir de index.html. No editar a mano. -->\n'
 
+# Versiona site.css y site.js en index.html con un hash de su contenido, para que
+# el navegador (y la caché de /assets/*) siempre tome la versión publicada.
+import hashlib
 base = (RAIZ / 'index.html').read_text(encoding='utf-8')
+for recurso in ['assets/css/site.css', 'assets/js/site.js']:
+    v = hashlib.sha1((RAIZ / recurso).read_bytes()).hexdigest()[:10]
+    base, n = re.subn(r'/%s(\?v=[0-9a-f]+)?"' % re.escape(recurso), '/%s?v=%s"' % (recurso, v), base)
+    assert n == 1, recurso
+(RAIZ / 'index.html').write_text(base, encoding='utf-8')
 js = (RAIZ / 'assets/js/site.js').read_text(encoding='utf-8')
 
 art = json.loads(re.search(r'^\s*const ART=(\{.*\});\s*$', js, re.M).group(1))

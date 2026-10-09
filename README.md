@@ -73,6 +73,9 @@ resuelve sin recargar la página.
 python3 scripts/generar-paginas.py
 ```
 
+El script también pone `?v=<hash>` a `site.css` y `site.js` en `index.html`, para
+que ningún navegador se quede con una versión vieja en caché.
+
 El nombre del sitio y la organización van como datos estructurados
 (`application/ld+json`) en el `<head>` de `index.html`.
 

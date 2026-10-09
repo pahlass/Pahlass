@@ -46,6 +46,16 @@ document.getElementById('otra').addEventListener('click',()=>{document.getElemen
   new IntersectionObserver(es=>{ es[0].isIntersecting?reproducir():v.pause(); },{threshold:0}).observe(v);
 })();
 
+/* portada: profundidad al hacer scroll (la escena se acerca y oscurece, el título se eleva) */
+(function(){
+  const h=document.getElementById('inicio'); if(!h||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let pend=false;
+  const pinta=()=>{ pend=false; const r=h.getBoundingClientRect(); const p=Math.min(1,Math.max(0,-r.top/(r.height*.85)));
+    h.style.setProperty('--p',p.toFixed(3)); };
+  addEventListener('scroll',()=>{ if(!pend){ pend=true; requestAnimationFrame(pinta); } },{passive:true});
+  addEventListener('resize',pinta); pinta();
+})();
+
 /* portada: el título entra palabra por palabra, rodando como un contador */
 (function(){
   const h=document.getElementById('heroTitulo'); if(!h) return;
