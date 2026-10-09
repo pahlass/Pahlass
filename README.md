@@ -13,7 +13,10 @@ assets/
   js/site.js              lógica del sitio público (ruteo, buscador, formulario, animaciones)
   img/                     fotografías y logos del sitio público
   videos/                  clips de fondo de la portada (con su .jpg de poster)
-favicon-32.png, favicon-180.png
+acerca/ prensa/ coppermind/ diagram/ casos/<slug>/
+                          páginas GENERADAS (no editar) — ver "URLs indexables"
+scripts/generar-paginas.py  genera esas páginas y sitemap.xml
+favicon.ico, favicon-32.png, favicon-48.png, favicon-180.png
 robots.txt, sitemap.xml
 _headers                 cabeceras HTTP (seguridad + caché) — las lee Cloudflare Pages
 _redirects                redirecciones de URLs antiguas — las lee Cloudflare Pages
@@ -51,6 +54,27 @@ completo en el pie de página del sitio). Todo el contenido de "casos" y
 "productos" vive como datos dentro de `assets/js/site.js` y se renderiza con una
 función `esc()` que escapa el HTML antes de insertarlo — no hay riesgo de XSS vía
 el hash de la URL ni vía el buscador.
+
+### URLs indexables (Google)
+
+Google ignora todo lo que va después de `#`, así que las vistas por ancla no
+aparecen como páginas propias en la búsqueda. Para que sí aparezcan (y Google
+pueda mostrar enlaces de sitio debajo del resultado principal),
+`scripts/generar-paginas.py` copia `index.html` a `/acerca/`, `/prensa/`,
+`/coppermind/`, `/diagram/` y `/casos/<slug>/`, cambiando solo el `<head>`
+(título, descripción, canonical, Open Graph), y regenera `sitemap.xml`. Al cargar
+una de esas rutas, `site.js` abre la vista correspondiente (y deja la URL como
+`/#acerca`, etc.); los enlaces internos usan las rutas reales y `site.js` los
+resuelve sin recargar la página.
+
+**Después de cualquier cambio en `index.html` o en los textos de `site.js`:**
+
+```bash
+python3 scripts/generar-paginas.py
+```
+
+El nombre del sitio y la organización van como datos estructurados
+(`application/ld+json`) en el `<head>` de `index.html`.
 
 El formulario de `#contacto` envía la solicitud a la misma API que usa `admin/`
 (`POST /api/solicitudes` en `admin-api`), que a su vez manda un correo con
