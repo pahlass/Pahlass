@@ -165,23 +165,18 @@ button:focus-visible,a:focus-visible{outline:1px solid #2B4FD8;outline-offset:3p
 html{scroll-behavior:smooth}
 [hidden]{display:none!important}
 /* ═══ productos: mosaicos del home ═══ */
-.pr{background:#08090B;color:#FFFFFF;border-bottom:1px solid #15171B}
-.pr-in{max-width:1840px;margin:0 auto;padding:130px 50px 120px;box-sizing:border-box}
-.pr-cab{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:48px}
-.pr-cab small{display:block;font:500 12px/1 'JetBrains Mono',monospace;letter-spacing:.18em;color:#7A808A;margin-bottom:18px}
-.pr-cab h2{margin:0;font:300 clamp(40px,4.6vw,72px)/1.02 'Space Grotesk',sans-serif;letter-spacing:-.02em}
-.pr-cab p{margin:0;max-width:26em;font:300 18px/1.55 'Space Grotesk',sans-serif;color:#A3A9B2}
-.pr-list{border-top:1px solid #23262B}
-.pr-row{display:block;padding:48px 0;border-bottom:1px solid #23262B;color:#FFFFFF}
-.pr-row-top{display:flex;align-items:baseline;justify-content:space-between;gap:24px}
-.pr-row-top b{font:400 clamp(56px,9vw,128px)/.92 'Space Grotesk',sans-serif;letter-spacing:-.02em;transition:color .25s ease}
-.pr-row:hover .pr-row-top b{color:#8CA0FF}
-.pr-idx{font:400 18px/1 'JetBrains Mono',monospace;color:#5C626B;flex-shrink:0;padding-bottom:.3em}
-.pr-row p{margin:22px 0 0;max-width:34em;font:300 18px/1.6 'Space Grotesk',sans-serif;color:#A3A9B2}
-.pr-l{margin-top:18px;font:400 15px/1 'Space Grotesk',sans-serif;display:inline-flex;gap:10px}
-.pr-l i{font-style:normal;font-family:'JetBrains Mono',monospace;transition:transform .25s}.pr-row:hover .pr-l i{transform:translateX(4px)}
-@media (max-width:700px){.pr-row{padding:34px 0}.pr-row-top b{font-size:clamp(40px,13vw,64px)}}
-@media (max-width:1000px){.pr-in{padding:90px 20px}.pr-grid{grid-template-columns:1fr}.pr-t{min-height:480px}.pr-tx{left:22px;right:22px;bottom:24px}}
+.pr{background:#FFFFFF;color:#1B1C22}
+.pr-in{max-width:1840px;margin:0 auto;padding:clamp(40px,4vw,72px) 50px clamp(100px,9vw,160px);box-sizing:border-box}
+.pr-et{margin:0 0 18px;font:400 17px/1.4 'Space Grotesk',sans-serif;color:#1B1C22}
+.pr-list{border-top:1px solid #E6E7EA}
+.pr-row{display:block;padding:30px 0 34px;border-bottom:1px solid #E6E7EA;color:#1B1C22}
+.pr-row-top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.pr-row-top b{font:400 clamp(56px,6.2vw,96px)/1 'Space Grotesk',sans-serif;letter-spacing:-.02em;transition:color .25s ease}
+.pr-row:hover .pr-row-top b{color:#4A5BD4}
+.pr-idx{font:400 15px/1 'Space Grotesk',sans-serif;color:#6B6D76;flex-shrink:0;padding-top:.5em}
+.pr-row p{margin:16px 0 0;max-width:60em;font:400 18px/1.55 'Space Grotesk',sans-serif;color:#1B1C22}
+@media (max-width:700px){.pr-row{padding:24px 0 28px}.pr-row-top b{font-size:clamp(44px,13vw,64px)}.pr-row p{font-size:16px}}
+@media (max-width:1000px){.pr-in{padding:24px 20px 90px}.pr-grid{grid-template-columns:1fr}.pr-t{min-height:480px}.pr-tx{left:22px;right:22px;bottom:24px}}
 /* ═══ productos: página de producto ═══ */
 .pd{position:fixed;inset:0;z-index:91;overflow-y:auto;overflow-x:hidden;background:#F4F4F5;color:#16181D;font-family:'Space Grotesk',system-ui,sans-serif;opacity:0;transition:opacity .45s;scroll-behavior:smooth}
 .pd.abierto{opacity:1}
