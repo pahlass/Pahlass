@@ -145,19 +145,18 @@ button:focus-visible,a:focus-visible{outline:1px solid #2B4FD8;outline-offset:3p
 @media (prefers-reduced-motion:reduce){.st-frase .st-c{visibility:visible}.st-sub{opacity:1;transform:none}}
 
 /* portada: el video conserva sus colores originales (sin tinte por escena) */
-#inicio .tinte{display:none}
 /* ═══ hero cinematográfico ═══ */
 #inicio{--p:0}
 #inicio .reel{transform:scale(calc(1 + var(--p)*.16));transform-origin:50% 40%;will-change:transform}
 #inicio .reel .sl.on{animation:h-entra 2.6s cubic-bezier(.2,.7,.1,1) both}
 @keyframes h-entra{from{opacity:0;filter:blur(14px);transform:scale(1.14)}to{opacity:1;filter:blur(0);transform:scale(1)}}
-#inicio .reel video{filter:saturate(1.05) contrast(1.45) brightness(.56)!important;transform-origin:50% 55%;animation:h-push 26s ease-in-out infinite alternate}
+#inicio .reel video{filter:saturate(1.18) contrast(1.32) brightness(.6)!important;transform-origin:50% 55%;animation:h-push 26s ease-in-out infinite alternate}
 @keyframes h-push{from{transform:scale(1.02)}to{transform:scale(1.1)}}
-/* gradación: sombras azul acero, altas luces cálidas */
-.h-grado{position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;
-  background:linear-gradient(180deg,rgba(30,52,86,.75) 0%,rgba(90,108,138,.3) 50%,rgba(10,16,28,.9) 100%)}
-.h-tono{position:absolute;inset:0;pointer-events:none;mix-blend-mode:soft-light;
-  background:radial-gradient(ellipse 60% 55% at 62% 48%,rgba(255,150,70,.35) 0%,rgba(255,150,70,0) 70%),linear-gradient(135deg,rgba(0,110,150,.45) 0%,rgba(0,60,90,.25) 100%)}
+/* acentos por industria: el color de cada escena tiñe la luz del hero */
+.h-tinte{position:absolute;inset:0;pointer-events:none;background:var(--t);mix-blend-mode:color;opacity:.1}
+.h-acento{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;opacity:.62;
+  background:radial-gradient(ellipse 50% 60% at 88% 26%,color-mix(in srgb,var(--t) 42%,transparent) 0%,transparent 68%),
+             radial-gradient(ellipse 55% 38% at 8% 102%,color-mix(in srgb,var(--t) 36%,transparent) 0%,transparent 70%)}
 /* viñeta: centro legible, bordes que se hunden en negro */
 .h-vineta{position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(ellipse 72% 62% at 50% 50%,rgba(3,4,6,.3) 0%,rgba(3,4,6,.16) 36%,rgba(3,4,6,.78) 76%,rgba(3,4,6,.97) 100%),
@@ -168,6 +167,15 @@ button:focus-visible,a:focus-visible{outline:1px solid #2B4FD8;outline-offset:3p
 @keyframes h-grano{0%{transform:translate(0,0)}25%{transform:translate(-4%,3%)}50%{transform:translate(3%,-5%)}75%{transform:translate(-2%,-2%)}100%{transform:translate(0,0)}}
 /* profundidad al hacer scroll: la escena se oscurece y el texto se eleva */
 .h-sombra{position:absolute;inset:0;pointer-events:none;background:#030406;opacity:calc(var(--p)*.85)}
+.h-ind{position:absolute;z-index:3;left:50px;right:50px;bottom:40px;display:grid;grid-template-columns:1fr auto;align-items:center;row-gap:14px;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.78);opacity:calc(1 - var(--p)*2)}
+.h-ind-n{display:flex;align-items:center;gap:10px}
+.h-ind-n i{width:7px;height:7px;background:var(--t);box-shadow:0 0 12px var(--t)}
+.h-ind-n b{font-weight:500;transition:opacity .35s}
+.h-ind-n b.sale{opacity:0}
+.h-ind-c{color:rgba(255,255,255,.5)}
+.h-ind-bar{grid-column:1/-1;height:1px;background:rgba(255,255,255,.14);overflow:hidden}
+.h-ind-bar i{display:block;height:100%;width:100%;background:var(--t);transform-origin:left;transform:scaleX(0)}
+@media (max-width:760px){.h-ind{left:20px;right:20px;bottom:28px}}
 #inicio .h-cont{transform:translateY(calc(var(--p)*-90px)) scale(calc(1 - var(--p)*.05));opacity:calc(1 - var(--p)*1.3);will-change:transform,opacity}
 @media (prefers-reduced-motion:reduce){#inicio .reel .sl.on,#inicio .reel video,.h-grano{animation:none}#inicio{--p:0!important}}
 
@@ -930,7 +938,7 @@ html{scroll-padding-top:90px}
 
 /* ═══ portada más oscura, con tinte que sigue a cada escena ═══ */
 @property --t{syntax:'<color>';inherits:true;initial-value:#4C8DFF}
-#inicio{--t:#4C8DFF;transition:--t 2.2s ease}
+#inicio{--t:#FF8A3D;transition:--t 1.2s ease}
 .reel video{filter:brightness(.72) contrast(1.08) saturate(1.05)!important}
 .tinte{position:absolute;inset:0;pointer-events:none}
 .t-color{background:var(--t);mix-blend-mode:color;opacity:.32}

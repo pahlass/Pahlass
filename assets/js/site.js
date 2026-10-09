@@ -40,10 +40,30 @@ document.getElementById('otra').addEventListener('click',()=>{document.getElemen
   const v=document.getElementById('intro'); if(!v) return;
   const quieto=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const reproducir=()=>{ if(quieto) return; const p=v.play(); if(p&&p.catch) p.catch(()=>{}); };
-  if(window.hud) hud(0);
   v.addEventListener('canplay',reproducir); reproducir();
   document.addEventListener('visibilitychange',()=>{ if(document.hidden) v.pause(); else reproducir(); });
   new IntersectionObserver(es=>{ es[0].isIntersecting?reproducir():v.pause(); },{threshold:0}).observe(v);
+})();
+
+/* portada: cada escena del video lleva el color de su industria */
+(function(){
+  const v=document.getElementById('intro'), h=document.getElementById('inicio'); if(!v||!h) return;
+  const IND={log:['Logística','#FF8A3D'],sal:['Salud','#2DD4BF'],fin:['Finanzas','#4C8DFF'],aut:['Automotriz','#FF5A5F'],man:['Manufactura','#FFB547'],
+    con:['Construcción','#FACC15'],agr:['Agroindustria','#A3E635'],bie:['Bienestar','#E879F9'],res:['Restaurantes','#FB7185'],com:['Comercio','#A78BFA']};
+  // inicio de cada escena (segundos) e industria que muestra
+  const E=[[0,'log'],[2.57,'sal'],[5.07,'fin'],[7.57,'aut'],[10.07,'man'],[12.57,'con'],[15.07,'agr'],[17.57,'con'],[20.4,'bie'],[22.9,'log'],[25.4,'res'],[27.9,'com'],[30.4,'agr'],[32.9,'con']];
+  const nom=document.getElementById('hInd'), cnt=document.getElementById('hCnt'), bar=document.getElementById('hBar');
+  let act=-1, vis=true;
+  const pinta=()=>{
+    const t=v.currentTime||0, dur=v.duration||34.9; let k=0; while(k+1<E.length&&t>=E[k+1][0]) k++;
+    const fin=k+1<E.length?E[k+1][0]:dur;
+    if(bar) bar.style.transform='scaleX('+Math.min(1,Math.max(0,(t-E[k][0])/(fin-E[k][0]))).toFixed(3)+')';
+    if(k!==act){ act=k; const [n,col]=IND[E[k][1]]; h.style.setProperty('--t',col);
+      if(cnt) cnt.textContent=String(k+1).padStart(2,'0')+' / '+E.length;
+      if(nom){ nom.classList.add('sale'); setTimeout(()=>{nom.textContent=n;nom.classList.remove('sale');},300); } }
+    if(vis) requestAnimationFrame(pinta); };
+  new IntersectionObserver(es=>{ const antes=vis; vis=es[0].isIntersecting; if(vis&&!antes) requestAnimationFrame(pinta); },{threshold:0}).observe(h);
+  requestAnimationFrame(pinta);
 })();
 
 /* portada: profundidad al hacer scroll (la escena se acerca y oscurece, el título se eleva) */
