@@ -1048,3 +1048,29 @@ html{scroll-padding-top:90px}
   section p[style*="font-size: 60px"],section p[style*="font-size: 44px"],section p[style*="font-size: 52px"],section p[style*="font-size: 46px"]{font-size:32px!important}
   section > div[style*="padding: 160px"]{padding-top:96px!important;padding-bottom:96px!important}
 }
+
+
+/* ═══ móvil, estilo Palantir: logo arriba, controles abajo al alcance del pulgar ═══ */
+.cb-abajo{display:none}
+.h-ind-c{display:flex;align-items:center;gap:16px}
+.h-pausa{width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,255,255,.55);background:rgba(8,9,11,.35);color:#FFFFFF;display:grid;place-items:center;cursor:pointer;padding:0}
+.h-pausa:hover{background:#FFFFFF;color:#08090B}
+.h-pausa .ic-play{display:none}.h-pausa.pausado .ic-play{display:block}.h-pausa.pausado .ic-pausa{display:none}
+@media (max-width:760px){
+  .cb-barra .cb-cta,.cb-barra .cb-ic{display:none}
+  .cb-abajo{display:flex;justify-content:space-between;align-items:center;position:fixed;left:16px;right:16px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:101;pointer-events:none}
+  .cb-abajo>*{pointer-events:auto}
+  .cb-ab-ic{display:flex;background:#FFFFFF;border:1px solid #16181D}
+  .cb-ab-ic button{width:48px;height:46px;display:grid;place-items:center;background:none;border:0;color:#16181D;cursor:pointer;padding:0}
+  .cb-ab-ic button+button{border-left:1px solid #16181D}
+  .cb-ab-ic button[aria-expanded="true"]{background:#16181D;color:#FFFFFF}
+  .cb-ab-cta{display:flex;align-items:center;height:48px;box-sizing:border-box;padding:0 20px;background:#FFFFFF;border:1px solid #16181D;color:#16181D;font:400 17px/1 'Space Grotesk',sans-serif}
+  .cb-panel{max-height:calc(100dvh - 160px)}
+  #inicio .reel video{filter:saturate(1.1) contrast(1.35) brightness(.46)!important}
+  #inicio .h-caja{padding:80px 24px 170px}
+  #heroTitulo{font-size:31px!important;line-height:1.14!important}
+  #heroTitulo.rolla{--rw:1.16em}
+  .rolla-cta{display:none!important}
+  .h-ind{bottom:calc(84px + env(safe-area-inset-bottom));left:20px;right:20px}
+  .pp{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+}
