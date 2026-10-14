@@ -54,6 +54,19 @@ def meta(doc, patron, valor):
     assert n == 1, patron
     return nuevo
 
+def aislar(doc, ruta):
+    """Cada página es una copia completa de index.html. Para que Google tome el
+    fragmento de búsqueda de la vista correspondiente (y no de la portada o de
+    Acerca), el resto del contenido se marca con data-nosnippet."""
+    i = doc.index('<div id="pfoto-acomp"')
+    cabeza, resto = doc[:i], doc[i:]
+    resto = resto.replace('<section ', '<section data-nosnippet ')
+    resto = resto.replace('<header class="cb"', '<header data-nosnippet class="cb"', 1)
+    resto = resto.replace('<footer class="pp"', '<footer data-nosnippet class="pp"', 1)
+    if ruta != 'acerca/':
+        cabeza = cabeza.replace('<div class="ac" id="ac"', '<div data-nosnippet class="ac" id="ac"', 1)
+    return cabeza + resto
+
 for ruta in ['acerca', 'prensa', 'coppermind', 'diagram', 'casos']:
     shutil.rmtree(RAIZ / ruta, ignore_errors=True)
 
@@ -68,14 +81,17 @@ for ruta, titulo, desc, tipo in paginas:
     doc = meta(doc, r'(<meta property="og:description" content=")[^"]*(">)', desc)
     doc = meta(doc, r'(<meta name="twitter:title" content=")[^"]*(">)', titulo)
     doc = meta(doc, r'(<meta name="twitter:description" content=")[^"]*(">)', desc)
+    doc = aislar(doc, ruta)
     doc = doc.replace('<!doctype html>\n', '<!doctype html>\n' + AVISO, 1)
     destino = RAIZ / ruta / 'index.html'
     destino.parent.mkdir(parents=True, exist_ok=True)
     destino.write_text(doc, encoding='utf-8')
 
+import datetime
+hoy = datetime.date.today().isoformat()
 urls = [('', '1.0')] + [(r, '0.8' if not r.startswith('casos/') else '0.6') for r, *_ in paginas]
 (RAIZ / 'sitemap.xml').write_text(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    + ''.join('  <url>\n    <loc>%s/%s</loc>\n    <priority>%s</priority>\n  </url>\n' % (DOMINIO, r, p) for r, p in urls)
+    + ''.join('  <url>\n    <loc>%s/%s</loc>\n    <lastmod>%s</lastmod>\n    <priority>%s</priority>\n  </url>\n' % (DOMINIO, r, hoy, p) for r, p in urls)
     + '</urlset>\n', encoding='utf-8')
 print('%d páginas generadas y sitemap.xml actualizado' % len(paginas))
