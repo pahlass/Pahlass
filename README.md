@@ -13,7 +13,7 @@ assets/
   js/site.js              lógica del sitio público (ruteo, buscador, formulario, animaciones)
   img/                     fotografías y logos del sitio público
   videos/                  clips de fondo de la portada (con su .jpg de poster)
-acerca/ prensa/ coppermind/ diagram/ casos/<slug>/
+acerca/ prensa/ coppermind/ diagram/ sdna/ casos/<slug>/
                           páginas GENERADAS (no editar) — ver "URLs indexables"
 scripts/generar-paginas.py  genera esas páginas y sitemap.xml
 favicon.ico, favicon-32.png, favicon-48.png, favicon-180.png
@@ -61,7 +61,7 @@ Google ignora todo lo que va después de `#`, así que las vistas por ancla no
 aparecen como páginas propias en la búsqueda. Para que sí aparezcan (y Google
 pueda mostrar enlaces de sitio debajo del resultado principal),
 `scripts/generar-paginas.py` copia `index.html` a `/acerca/`, `/prensa/`,
-`/coppermind/`, `/diagram/` y `/casos/<slug>/`, cambiando solo el `<head>`
+`/coppermind/`, `/diagram/`, `/sdna/` y `/casos/<slug>/`, cambiando solo el `<head>`
 (título, descripción, canonical, Open Graph), y regenera `sitemap.xml`. Al cargar
 una de esas rutas, `site.js` abre la vista correspondiente (y deja la URL como
 `/#acerca`, etc.); los enlaces internos usan las rutas reales y `site.js` los

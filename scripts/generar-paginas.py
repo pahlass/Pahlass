@@ -6,7 +6,7 @@ El sitio es una sola página (index.html) con vistas que se abren por ancla
 después de "#", así que para que cada vista tenga su propia URL en los
 resultados de búsqueda este script copia index.html a:
 
-  /acerca/  /prensa/  /coppermind/  /diagram/  /casos/<slug>/
+  /acerca/  /prensa/  /coppermind/  /diagram/  /sdna/  /casos/<slug>/
 
 cambiando solo el <head> (título, descripción, canonical y Open Graph).
 Al cargar, assets/js/site.js abre la vista que corresponde a la ruta.
@@ -37,7 +37,7 @@ js = (RAIZ / 'assets/js/site.js').read_text(encoding='utf-8')
 
 art = json.loads(re.search(r'^\s*const ART=(\{.*\});\s*$', js, re.M).group(1))
 def producto(k):
-    m = re.search(r'"%s": \{"n": "[^"]+", "tag": "([^"]+)", "sub": "([^"]+)"' % k, js)
+    m = re.search(r'(?:"%s": |P\.%s=)\{"n": "[^"]+", "tag": "([^"]+)", "sub": "([^"]+)"' % (k, k), js)
     return m.group(1) + ' ' + m.group(2)
 
 paginas = [
@@ -47,6 +47,7 @@ paginas = [
      'Casos, artículos, comunicados e investigación de Pahlass sobre orquestación de datos multidominio en cada industria.', 'website'),
     ('coppermind/', 'Coppermind · Pahlass', producto('coppermind'), 'website'),
     ('diagram/', 'Diagram · Pahlass', producto('diagram'), 'website'),
+    ('sdna/', 'sDNA · Pahlass', producto('sdna'), 'website'),
 ] + [('casos/%s/' % slug, a['titular'] + ' · Pahlass', a['dek'], 'article') for slug, a in art.items()]
 
 def meta(doc, patron, valor):
@@ -67,7 +68,7 @@ def aislar(doc, ruta):
         cabeza = cabeza.replace('<div class="ac" id="ac"', '<div data-nosnippet class="ac" id="ac"', 1)
     return cabeza + resto
 
-for ruta in ['acerca', 'prensa', 'coppermind', 'diagram', 'casos']:
+for ruta in ['acerca', 'prensa', 'coppermind', 'diagram', 'sdna', 'casos']:
     shutil.rmtree(RAIZ / ruta, ignore_errors=True)
 
 for ruta, titulo, desc, tipo in paginas:

@@ -2,107 +2,112 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pahlass.com/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pahlass.com/acerca/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pahlass.com/prensa/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pahlass.com/coppermind/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pahlass.com/diagram/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pahlass.com/sdna/</loc>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pahlass.com/casos/manufactura/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pahlass.com/casos/agroindustria/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pahlass.com/casos/construccion/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pahlass.com/casos/comercio/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pahlass.com/casos/ferreteria/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pahlass.com/casos/salud/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pahlass.com/casos/educacion/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pahlass.com/casos/servicios/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pahlass.com/casos/finanzas/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pahlass.com/casos/direccion/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pahlass.com/casos/seguridad/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pahlass.com/casos/presentacion/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pahlass.com/casos/beca-regla/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pahlass.com/casos/recibo-inmutable/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pahlass.com/casos/riesgo-desercion/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://pahlass.com/casos/acompanamiento/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-15</lastmod>
     <priority>0.6</priority>
   </url>
 </urlset>
