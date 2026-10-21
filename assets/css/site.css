@@ -52,7 +52,7 @@ button:focus-visible,a:focus-visible{outline:1px solid #2B4FD8;outline-offset:3p
 @media (max-width:1100px){.pp-in{padding:64px 22px 32px}.pp-cols{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 24px}}
 @media (max-width:520px){.pp-cols{grid-template-columns:1fr}}
 
-/* productos: fondos definitivos — Coppermind #22304A, Diagram #6D9CF2 */
+/* productos: fondos definitivos — Chronos #22304A, Kairos #6D9CF2 */
 .pr-cu{background:#22304A}
 .pr-di{background:#6D9CF2;color:#0E1A2E}
 
@@ -1088,3 +1088,5 @@ html{scroll-padding-top:90px}
 @media (max-width:760px){
   .pd,.ac,.sp,.cs{padding-bottom:calc(80px + env(safe-area-inset-bottom))}
 }
+/* escritorio: el texto de la portada de producto no invade la ilustración */
+@media (min-width:1001px){.pd-hero .pd-tag{max-width:16em}.pd-hero .pd-sub{max-width:31em}}

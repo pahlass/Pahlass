@@ -3,3 +3,11 @@
 # /acerca/ ya es una página real (ver scripts/generar-paginas.py).
 /modelo/*   /#despliegue   301
 /modelo     /#despliegue   301
+
+# Productos renombrados: Coppermind → Chronos, Diagram → Kairos, sDNA → Therapeia.
+/coppermind   /chronos/     301
+/coppermind/  /chronos/     301
+/diagram      /kairos/      301
+/diagram/     /kairos/      301
+/sdna         /therapeia/   301
+/sdna/        /therapeia/   301

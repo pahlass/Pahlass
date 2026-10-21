@@ -6,7 +6,7 @@ El sitio es una sola página (index.html) con vistas que se abren por ancla
 después de "#", así que para que cada vista tenga su propia URL en los
 resultados de búsqueda este script copia index.html a:
 
-  /acerca/  /prensa/  /coppermind/  /diagram/  /sdna/  /casos/<slug>/
+  /acerca/  /prensa/  /chronos/  /kairos/  /teleios/  /therapeia/  /casos/<slug>/
 
 cambiando solo el <head> (título, descripción, canonical y Open Graph).
 Al cargar, assets/js/site.js abre la vista que corresponde a la ruta.
@@ -45,9 +45,10 @@ paginas = [
      'Por qué existe Pahlass: construimos el modelo operativo detrás de cada decisión, con ingenieros que trabajan de forma permanente junto a cada organización.', 'website'),
     ('prensa/', 'Sala de prensa · Pahlass',
      'Casos, artículos, comunicados e investigación de Pahlass sobre orquestación de datos multidominio en cada industria.', 'website'),
-    ('coppermind/', 'Coppermind · Pahlass', producto('coppermind'), 'website'),
-    ('diagram/', 'Diagram · Pahlass', producto('diagram'), 'website'),
-    ('sdna/', 'sDNA · Pahlass', producto('sdna'), 'website'),
+    ('chronos/', 'Chronos · Pahlass', producto('chronos'), 'website'),
+    ('kairos/', 'Kairos · Pahlass', producto('kairos'), 'website'),
+    ('teleios/', 'Teleios · Pahlass', producto('teleios'), 'website'),
+    ('therapeia/', 'Therapeia · Pahlass', producto('therapeia'), 'website'),
 ] + [('casos/%s/' % slug, a['titular'] + ' · Pahlass', a['dek'], 'article') for slug, a in art.items()]
 
 def meta(doc, patron, valor):
@@ -68,7 +69,7 @@ def aislar(doc, ruta):
         cabeza = cabeza.replace('<div class="ac" id="ac"', '<div data-nosnippet class="ac" id="ac"', 1)
     return cabeza + resto
 
-for ruta in ['acerca', 'prensa', 'coppermind', 'diagram', 'sdna', 'casos']:
+for ruta in ['acerca', 'prensa', 'chronos', 'kairos', 'teleios', 'therapeia', 'coppermind', 'diagram', 'sdna', 'casos']:
     shutil.rmtree(RAIZ / ruta, ignore_errors=True)
 
 for ruta, titulo, desc, tipo in paginas:
@@ -87,6 +88,15 @@ for ruta, titulo, desc, tipo in paginas:
     destino = RAIZ / ruta / 'index.html'
     destino.parent.mkdir(parents=True, exist_ok=True)
     destino.write_text(doc, encoding='utf-8')
+
+# Direcciones anteriores de los productos: redirigen a su reemplazo.
+ANTERIORES = {'coppermind': 'chronos', 'diagram': 'kairos', 'sdna': 'therapeia'}
+for viejo, nuevo in ANTERIORES.items():
+    destino = RAIZ / viejo / 'index.html'
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    destino.write_text('<!doctype html>\n' + AVISO + '<html lang="es"><head><meta charset="utf-8"><title>Pahlass</title>'
+        '<link rel="canonical" href="%s/%s/"><meta http-equiv="refresh" content="0; url=/%s/"></head>'
+        '<body><a href="/%s/">Continuar</a></body></html>\n' % (DOMINIO, nuevo, nuevo, nuevo), encoding='utf-8')
 
 import datetime
 hoy = datetime.date.today().isoformat()
