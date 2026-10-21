@@ -13,8 +13,8 @@ assets/
   js/site.js              lógica del sitio público (ruteo, buscador, formulario, animaciones)
   img/                     fotografías y logos del sitio público
   videos/                  clips de fondo de la portada (con su .jpg de poster)
-acerca/ prensa/ chronos/ kairos/ teleios/ therapeia/ casos/<slug>/
-coppermind/ diagram/ sdna/  redirecciones a los productos renombrados
+acerca/ prensa/ chronos/ kairos/ teleios/ apographe/ casos/<slug>/
+coppermind/ diagram/ sdna/ therapeia/  redirecciones a los productos renombrados
                           páginas GENERADAS (no editar) — ver "URLs indexables"
 scripts/generar-paginas.py  genera esas páginas y sitemap.xml
 favicon.ico, favicon-32.png, favicon-48.png, favicon-180.png
@@ -62,7 +62,7 @@ Google ignora todo lo que va después de `#`, así que las vistas por ancla no
 aparecen como páginas propias en la búsqueda. Para que sí aparezcan (y Google
 pueda mostrar enlaces de sitio debajo del resultado principal),
 `scripts/generar-paginas.py` copia `index.html` a `/acerca/`, `/prensa/`,
-`/chronos/`, `/kairos/`, `/teleios/`, `/therapeia/` y `/casos/<slug>/`, cambiando solo el `<head>`
+`/chronos/`, `/kairos/`, `/teleios/`, `/apographe/` y `/casos/<slug>/`, cambiando solo el `<head>`
 (título, descripción, canonical, Open Graph), y regenera `sitemap.xml`. Al cargar
 una de esas rutas, `site.js` abre la vista correspondiente (y deja la URL como
 `/#acerca`, etc.); los enlaces internos usan las rutas reales y `site.js` los

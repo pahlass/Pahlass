@@ -6,7 +6,7 @@ El sitio es una sola página (index.html) con vistas que se abren por ancla
 después de "#", así que para que cada vista tenga su propia URL en los
 resultados de búsqueda este script copia index.html a:
 
-  /acerca/  /prensa/  /chronos/  /kairos/  /teleios/  /therapeia/  /casos/<slug>/
+  /acerca/  /prensa/  /chronos/  /kairos/  /teleios/  /apographe/  /casos/<slug>/
 
 cambiando solo el <head> (título, descripción, canonical y Open Graph).
 Al cargar, assets/js/site.js abre la vista que corresponde a la ruta.
@@ -37,7 +37,7 @@ js = (RAIZ / 'assets/js/site.js').read_text(encoding='utf-8')
 
 art = json.loads(re.search(r'^\s*const ART=(\{.*\});\s*$', js, re.M).group(1))
 def producto(k):
-    m = re.search(r'(?:"%s": |P\.%s=)\{"n": "[^"]+", "tag": "([^"]+)", "sub": "([^"]+)"' % (k, k), js)
+    m = re.search(r'(?:"%s": |P\.%s=)\{"n": "[^"]+",(?: "h1": "(?:[^"\\]|\\.)*",)? "tag": "([^"]+)", "sub": "([^"]+)"' % (k, k), js)
     return m.group(1) + ' ' + m.group(2)
 
 paginas = [
@@ -48,7 +48,7 @@ paginas = [
     ('chronos/', 'Chronos · Pahlass', producto('chronos'), 'website'),
     ('kairos/', 'Kairos · Pahlass', producto('kairos'), 'website'),
     ('teleios/', 'Teleios · Pahlass', producto('teleios'), 'website'),
-    ('therapeia/', 'Therapeia · Pahlass', producto('therapeia'), 'website'),
+    ('apographe/', 'Apographe EHR · Pahlass', producto('apographe'), 'website'),
 ] + [('casos/%s/' % slug, a['titular'] + ' · Pahlass', a['dek'], 'article') for slug, a in art.items()]
 
 def meta(doc, patron, valor):
@@ -69,7 +69,7 @@ def aislar(doc, ruta):
         cabeza = cabeza.replace('<div class="ac" id="ac"', '<div data-nosnippet class="ac" id="ac"', 1)
     return cabeza + resto
 
-for ruta in ['acerca', 'prensa', 'chronos', 'kairos', 'teleios', 'therapeia', 'coppermind', 'diagram', 'sdna', 'casos']:
+for ruta in ['acerca', 'prensa', 'chronos', 'kairos', 'teleios', 'apographe', 'therapeia', 'coppermind', 'diagram', 'sdna', 'casos']:
     shutil.rmtree(RAIZ / ruta, ignore_errors=True)
 
 for ruta, titulo, desc, tipo in paginas:
@@ -90,7 +90,7 @@ for ruta, titulo, desc, tipo in paginas:
     destino.write_text(doc, encoding='utf-8')
 
 # Direcciones anteriores de los productos: redirigen a su reemplazo.
-ANTERIORES = {'coppermind': 'chronos', 'diagram': 'kairos', 'sdna': 'therapeia'}
+ANTERIORES = {'coppermind': 'chronos', 'diagram': 'kairos', 'sdna': 'apographe', 'therapeia': 'apographe'}
 for viejo, nuevo in ANTERIORES.items():
     destino = RAIZ / viejo / 'index.html'
     destino.parent.mkdir(parents=True, exist_ok=True)

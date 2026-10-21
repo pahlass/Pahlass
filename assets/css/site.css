@@ -1090,3 +1090,6 @@ html{scroll-padding-top:90px}
 }
 /* escritorio: el texto de la portada de producto no invade la ilustración */
 @media (min-width:1001px){.pd-hero .pd-tag{max-width:16em}.pd-hero .pd-sub{max-width:31em}}
+
+/* sufijo del nombre de producto (Apographe EHR) */
+.pr-suf,.pd-suf{font-size:.32em;letter-spacing:.08em;font-weight:400;margin-left:.05em;vertical-align:.25em;opacity:.7}
