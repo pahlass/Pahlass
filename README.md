@@ -14,7 +14,7 @@ assets/
   img/                     fotografías y logos del sitio público
   videos/                  clips de fondo de la portada (con su .jpg de poster)
 acerca/ prensa/ chronos/ kairos/ teleios/ therapeia/ casos/<slug>/
-coppermind/ diagram/ sdna/  redirecciones a los productos renombrados
+coppermind/ diagram/ sdna/ apographe/  redirecciones a los productos renombrados
                           páginas GENERADAS (no editar) — ver "URLs indexables"
 scripts/generar-paginas.py  genera esas páginas y sitemap.xml
 favicon.ico, favicon-32.png, favicon-48.png, favicon-180.png

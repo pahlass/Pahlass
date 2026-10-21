@@ -69,7 +69,7 @@ def aislar(doc, ruta):
         cabeza = cabeza.replace('<div class="ac" id="ac"', '<div data-nosnippet class="ac" id="ac"', 1)
     return cabeza + resto
 
-for ruta in ['acerca', 'prensa', 'chronos', 'kairos', 'teleios', 'therapeia', 'coppermind', 'diagram', 'sdna', 'casos']:
+for ruta in ['acerca', 'prensa', 'chronos', 'kairos', 'teleios', 'therapeia', 'coppermind', 'diagram', 'sdna', 'apographe', 'casos']:
     shutil.rmtree(RAIZ / ruta, ignore_errors=True)
 
 for ruta, titulo, desc, tipo in paginas:
@@ -90,7 +90,7 @@ for ruta, titulo, desc, tipo in paginas:
     destino.write_text(doc, encoding='utf-8')
 
 # Direcciones anteriores de los productos: redirigen a su reemplazo.
-ANTERIORES = {'coppermind': 'chronos', 'diagram': 'kairos', 'sdna': 'therapeia'}
+ANTERIORES = {'coppermind': 'chronos', 'diagram': 'kairos', 'sdna': 'therapeia', 'apographe': 'therapeia'}
 for viejo, nuevo in ANTERIORES.items():
     destino = RAIZ / viejo / 'index.html'
     destino.parent.mkdir(parents=True, exist_ok=True)
