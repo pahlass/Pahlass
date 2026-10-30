@@ -4,12 +4,16 @@
 /modelo/*   /#despliegue   301
 /modelo     /#despliegue   301
 
-# Productos renombrados: Coppermind → Chronos, Diagram → Kairos, sDNA → Therapeia.
-/coppermind   /chronos/     301
-/coppermind/  /chronos/     301
-/diagram      /kairos/      301
-/diagram/     /kairos/      301
-/sdna         /therapeia/   301
-/sdna/        /therapeia/   301
-/apographe    /therapeia/   301
-/apographe/   /therapeia/   301
+# Productos renombrados: Coppermind, Diagram, Chronos y Kairos → Génesis; sDNA y Therapeia → Apographe Health.
+/coppermind   /genesis/   301
+/coppermind/  /genesis/   301
+/diagram   /genesis/   301
+/diagram/  /genesis/   301
+/chronos   /genesis/   301
+/chronos/  /genesis/   301
+/kairos   /genesis/   301
+/kairos/  /genesis/   301
+/sdna   /apographe/   301
+/sdna/  /apographe/   301
+/therapeia   /apographe/   301
+/therapeia/  /apographe/   301
